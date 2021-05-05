@@ -1,0 +1,31 @@
+
+=
+web/index.jsp,9\f\9f198ed450f32e45b10ec3c2b1406e609b4a96cd
+U
+%web/views/adminPages/header_admin.jsp,0\2\027fecd0264346121b2808fc10f98926f4f72f5a
+K
+.github/workflows/azure.yml,c\c\cc1f922f5375576c675a708c38bbd2aec892a48d
+S
+#src/main/java/dao/LoginDAOImpl.java,3\1\3147198f285c29d7193e865e6c8e4dc278d9edac
+^
+.src/main/java/controller/DeleteController.java,b\4\b489aafa74c4a2ff7ed7a96d14cf255cec9364a2
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+S
+#web/views/userPages/header_user.jsp,a\2\a20eb6ba89d61ce0a557e80f1e2bd96a12da43e0
+O
+web/views/publicPages/login.jsp,0\c\0cf2549d194bb3013434deebb301ba4b06a7fd02
+P
+ src/main/java/entity/Answer.java,b\c\bc71287e1035bd90404cd106823bc8cf88ad9bc8
+X
+(src/main/java/dao/PassedTestDAOImpl.java,c\a\ca632b5e73d279736df1ca5abd7b23be9a08ff83
+f
+6src/main/java/controller/LanguageSwitchController.java,3\1\31844c612904d99b13496c12668652c7f88f69c2
+\
+,src/main/java/controller/TestController.java,2\2\228b7b8872cb59e5715468429725d3b0d0c1aad4
+`
+0src/main/java/controller/QuestionController.java,b\5\b50e6c88e216717140dc9461291480ec0a97384a
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+F
+OnlineTestingAppDB.sql,a\6\a60941f91c2411133b03dddad07c3bbdf083ea64

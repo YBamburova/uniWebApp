@@ -1,0 +1,19 @@
+
+n
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(¯ôòĞ
+h
+java:S3776!"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(¹Â·Š
+t
+java:S19897"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(Òüÿÿÿÿ
+c
+java:S1192F"HDefine a constant instead of duplicating this literal "message" 6 times.(„¤ÿùùÿÿÿÿ
+s
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(ºòÈùÿÿÿÿ
+]
+java:S11925"GDefine a constant instead of duplicating this literal "testID" 3 times.(Ä£È
+n
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(¸àÛš
+b
+java:S1192,"GDefine a constant instead of duplicating this literal "topics" 4 times.(ÌòÃµøÿÿÿÿ
+h
+java:S3776d"RRefactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.(üª¼í

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="MVCTestingApp:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>MVCTestingApp</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="MVCTestingApp-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="MVCTestingApp:war exploded" />
+    </root>
+  </artifact>
+</component>

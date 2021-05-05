@@ -1,0 +1,8 @@
+entity\PassedTestTest.class
+entity\QuestionTest.class
+entity\UserTest.class
+entity\TopicTest.class
+entity\TestPassTest.class
+entity\TestTest.class
+controller\LanguageSwitchControllerTest.class
+entity\LoginTest.class

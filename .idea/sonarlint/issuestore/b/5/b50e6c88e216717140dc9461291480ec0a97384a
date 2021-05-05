@@ -1,0 +1,11 @@
+
+\
+java:S1192:"FDefine a constant instead of duplicating this literal "false" 8 times.(•äÝÂ
+Z
+java:S2147$"DCombine this catch with the one at line 34, which has the same body.(ï­£Ä
+h
+java:S37764"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(üª¼í
+n
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(˜øÍ¬
+Z
+java:S2147-"DCombine this catch with the one at line 43, which has the same body.(ï­£Ä
