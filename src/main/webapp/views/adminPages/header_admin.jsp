@@ -21,6 +21,8 @@
     String LocaleSignIn = getResource(resource, "LocaleSignIn");
     String LocaleSignUp = getResource(resource, "LocaleSignUp");
     String LocaleUsers = getResource(resource, "LocaleUsers");
+    String LocaleAboutUs = getResource(resource, "LocaleAboutUs");
+
 %>
 
 
@@ -48,6 +50,11 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/about-us.jsp"><%=LocaleAboutUs%>
+                        </a>
+                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/logout.jsp"><%=LocaleLogout%>
                         </a>

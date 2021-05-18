@@ -19,6 +19,9 @@
     String LocaleLogout = getResource(resource, "LocaleLogout");
     String LocaleSignIn = getResource(resource, "LocaleSignIn");
     String LocaleSignUp = getResource(resource, "LocaleSignUp");
+    String LocaleResourses = getResource(resource, "LocaleResourses");
+    String LocaleAboutUs = getResource(resource, "LocaleAboutUs");
+    
 %>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -42,6 +45,16 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/tests"><%=LocaleTests%>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/resources.jsp"><%=LocaleResourses%>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/about-us.jsp"><%=LocaleAboutUs%>
                     </a>
                 </li>
 
