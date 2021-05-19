@@ -33,13 +33,14 @@
 <head>
     <title><%=LocaleResourses%>
     </title>
-    <link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
 
 
 </head>
 
 <body>
 <jsp:include page="header_user.jsp"/>
+<link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <div class="" style="position: absolute; right:20px" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
     </div>
