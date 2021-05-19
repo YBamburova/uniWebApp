@@ -1,8 +1,4 @@
 
-=
-web/index.jsp,9\f\9f198ed450f32e45b10ec3c2b1406e609b4a96cd
-U
-%web/views/adminPages/header_admin.jsp,0\2\027fecd0264346121b2808fc10f98926f4f72f5a
 K
 .github/workflows/azure.yml,c\c\cc1f922f5375576c675a708c38bbd2aec892a48d
 S
@@ -11,10 +7,6 @@ S
 .src/main/java/controller/DeleteController.java,b\4\b489aafa74c4a2ff7ed7a96d14cf255cec9364a2
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-S
-#web/views/userPages/header_user.jsp,a\2\a20eb6ba89d61ce0a557e80f1e2bd96a12da43e0
-O
-web/views/publicPages/login.jsp,0\c\0cf2549d194bb3013434deebb301ba4b06a7fd02
 P
  src/main/java/entity/Answer.java,b\c\bc71287e1035bd90404cd106823bc8cf88ad9bc8
 X
@@ -29,3 +21,33 @@ f
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 F
 OnlineTestingAppDB.sql,a\6\a60941f91c2411133b03dddad07c3bbdf083ea64
+J
+src/main/webapp/logout.jsp,e\7\e7a26d636a815ab45217ad388a04d73824e80eff
+[
++src/main/webapp/views/publicPages/login.jsp,5\8\58c3bff780386b026e74e20b610635445ff0a7ca
+]
+-src/main/java/controller/LoginController.java,d\9\d915cdbef77c656eebfb7602fce5b0a8962b2b51
+I
+src/main/webapp/index.jsp,8\e\8e6d3b70c9f5b02570779b0441540d45eceb0ded
+^
+.src/main/java/controller/DBConnectionUtil.java,7\e\7ec43db213bc8eadcfca51fb44083c05384723fc
+_
+/src/main/webapp/views/userPages/header_user.jsp,8\c\8c9698fd0885f5a6869c1452e5927e45e5ddb4f8
+]
+-src/main/webapp/views/adminPages/user-add.jsp,8\3\8363f2d1a96abe354963fb1efd5d25ac6d8ca5bb
+^
+.src/main/webapp/views/adminPages/pass-test.jsp,1\0\103c6daac6ad89240408928e9fdc4408dd655443
+]
+-src/main/webapp/views/adminPages/test-add.jsp,e\c\ec861fa64dc65ad705808ec7d6a7b5244bd694e5
+^
+.src/main/webapp/views/adminPages/test-edit.jsp,b\a\ba53fa645c7e3785b54308e391daf5087c96e8ac
+^
+.src/main/webapp/views/adminPages/test-list.jsp,e\c\ec132181601831087443c1e7e344084e817f4284
+]
+-src/main/webapp/views/userPages/user-info.jsp,d\f\df831d151bda440fa2bac35228f7a5f3cf69cda5
+]
+-src/main/webapp/views/userPages/test-list.jsp,6\9\691a7b551b67fd010317413e64f705af6c372ce5
+]
+-src/main/webapp/views/userPages/pass-test.jsp,5\8\5838925ddf411268bb8aec306d19b8c5ac79ca8d
+`
+0src/main/java/controller/TestPassController.java,0\2\0260d3891980cefcdd883fb489f034444003bbfb

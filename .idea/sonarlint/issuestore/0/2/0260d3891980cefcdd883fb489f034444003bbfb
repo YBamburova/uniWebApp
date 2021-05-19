@@ -1,0 +1,29 @@
+
+\
+java:S11928"FDefine a constant instead of duplicating this literal "false" 4 times.(Ùïúµ
+]
+java:S1192("GDefine a constant instead of duplicating this literal "testID" 4 times.(º¨İ—
+E
+java:S5411O"*Use the primitive boolean expression here.(èÒ­øÿÿÿÿ
+h
+java:S3776!"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(üª¼í
+n
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(³ »÷
+s
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(ì£Õ§øÿÿÿÿ
+n
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(¤¸ˆ
+s
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(Œª¯ùÿÿÿÿ
+s
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(Ëšñøøÿÿÿÿ
+s
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(æš°‡øÿÿÿÿ
+n
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(–Ì™
+s
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(É«Ãõÿÿÿÿÿ
+n
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(±•·
+s
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(µ€àÉşÿÿÿÿ
