@@ -11,5 +11,3 @@ services:
     ports:
       # <Port exposed> : <MySQL Port running inside container>
       - '3306:3306'
-    volumes:
-      - "./scripts/schema.sql:/OnlineTestingAppDB.sql"

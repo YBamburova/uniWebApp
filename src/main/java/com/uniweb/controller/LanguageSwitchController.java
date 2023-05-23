@@ -25,7 +25,7 @@ public class LanguageSwitchController {
             session.setAttribute("language", "ua");
             session.setAttribute("country", "UA");
         }
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/login");
         requestDispatcher.forward(req, resp);
     }
 }

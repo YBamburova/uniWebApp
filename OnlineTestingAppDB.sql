@@ -18,6 +18,51 @@ USE `final_project`;
 /*!40111 SET @OLD_SQL_NOTES = @@SQL_NOTES, SQL_NOTES = 0 */;
 
 --
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users`
+(
+    `id`        int                      NOT NULL AUTO_INCREMENT,
+    `username`  varchar(45)              NOT NULL,
+    `name`      varchar(45)              NOT NULL,
+    `surname`   varchar(45)              NOT NULL,
+    `email`     varchar(45)              NOT NULL,
+    `password`  varchar(45)              NOT NULL,
+    `isBlocked` enum ('true','false')    NOT NULL DEFAULT 'false',
+    `type`      enum ('student','admin') NOT NULL DEFAULT 'student',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idusers_UNIQUE` (`id`),
+    UNIQUE KEY `login_UNIQUE` (`username`),
+    UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 68
+  DEFAULT CHARSET = utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users`
+    DISABLE KEYS */;
+INSERT INTO `users`
+VALUES (22, 'MaradRoman', 'Roma', 'Marad', 'maradroman@mail.com', '123456789', 'false', 'admin'),
+       (60, 'LindaRamirez', 'Linda', 'Ramirez', 'linda.ramirez@example.com', 'OuUenWtZNM3xsSt', 'false', 'student'),
+       (61, 'ShellyWoods', 'Shelly', 'Woods', 'shelly.woods@example.com', '0Ft1zEQNc1qIGqD', 'false', 'student'),
+       (62, 'HeatherSimpson', 'Heather', 'Simpson', 'heather.simpson@example.com', 'G9i3bQbeijnMt9f', 'false',
+        'student'),
+       (63, 'AlexBurke', 'Alex1', 'Burke', 'alex.burke@example.com', 'TdthXZ8XwOkUaIq', 'false', 'student'),
+       (64, 'ChristyEvans', 'Christy', 'Evans', 'christy.evans@example.com', 'TmYnCkucmZbnSe5', 'false', 'student');
+/*!40000 ALTER TABLE `users`
+    ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `passed_tests`
 --
 
@@ -114,6 +159,37 @@ VALUES (33, 1, 'CPP', 'right', '---', '---', '---', 'true', 'false', 'false', 'f
 UNLOCK TABLES;
 
 --
+-- Table structure for table `topic`
+--
+DROP TABLE IF EXISTS `topic`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `topic`
+(
+    `id`   int         NOT NULL AUTO_INCREMENT,
+    `name` varchar(45) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 4
+  DEFAULT CHARSET = utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `topic`
+--
+
+LOCK TABLES `topic` WRITE;
+/*!40000 ALTER TABLE `topic`
+    DISABLE KEYS */;
+INSERT INTO `topic`
+VALUES (1, 'c++'),
+       (2, 'java'),
+       (3, 'javascript');
+/*!40000 ALTER TABLE `topic`
+    ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tests`
 --
 
@@ -158,84 +234,6 @@ VALUES (40, 'Java Basics Quiz', 2, 3, 30, 2),
 /*!40000 ALTER TABLE `tests`
     ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `topic`
---
-
-DROP TABLE IF EXISTS `topic`;
-/*!40101 SET @saved_cs_client = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `topic`
-(
-    `id`   int         NOT NULL AUTO_INCREMENT,
-    `name` varchar(45) NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 4
-  DEFAULT CHARSET = utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `topic`
---
-
-LOCK TABLES `topic` WRITE;
-/*!40000 ALTER TABLE `topic`
-    DISABLE KEYS */;
-INSERT INTO `topic`
-VALUES (1, 'c++'),
-       (2, 'java'),
-       (3, 'javascript');
-/*!40000 ALTER TABLE `topic`
-    ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users`
-(
-    `id`        int                      NOT NULL AUTO_INCREMENT,
-    `username`  varchar(45)              NOT NULL,
-    `name`      varchar(45)              NOT NULL,
-    `surname`   varchar(45)              NOT NULL,
-    `email`     varchar(45)              NOT NULL,
-    `password`  varchar(45)              NOT NULL,
-    `isBlocked` enum ('true','false')    NOT NULL DEFAULT 'false',
-    `type`      enum ('student','admin') NOT NULL DEFAULT 'student',
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `idusers_UNIQUE` (`id`),
-    UNIQUE KEY `login_UNIQUE` (`username`),
-    UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 68
-  DEFAULT CHARSET = utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users`
-    DISABLE KEYS */;
-INSERT INTO `users`
-VALUES (22, 'MaradRoman', 'Roma', 'Marad', 'maradroman@mail.com', '123456789', 'false', 'admin'),
-       (60, 'LindaRamirez', 'Linda', 'Ramirez', 'linda.ramirez@example.com', 'OuUenWtZNM3xsSt', 'false', 'student'),
-       (61, 'ShellyWoods', 'Shelly', 'Woods', 'shelly.woods@example.com', '0Ft1zEQNc1qIGqD', 'false', 'student'),
-       (62, 'HeatherSimpson', 'Heather', 'Simpson', 'heather.simpson@example.com', 'G9i3bQbeijnMt9f', 'false',
-        'student'),
-       (63, 'AlexBurke', 'Alex1', 'Burke', 'alex.burke@example.com', 'TdthXZ8XwOkUaIq', 'false', 'student'),
-       (64, 'ChristyEvans', 'Christy', 'Evans', 'christy.evans@example.com', 'TmYnCkucmZbnSe5', 'false', 'student');
-/*!40000 ALTER TABLE `users`
-    ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE = @OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE = @OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS */;
