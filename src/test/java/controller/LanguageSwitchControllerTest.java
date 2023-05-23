@@ -1,5 +1,6 @@
 package controller;
 
+import com.uniweb.controller.LanguageSwitchController;
 import org.junit.jupiter.api.Test;
 
 import javax.servlet.RequestDispatcher;

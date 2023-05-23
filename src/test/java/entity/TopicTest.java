@@ -1,6 +1,6 @@
 package entity;
 
-import org.junit.jupiter.api.BeforeAll;
+import com.uniweb.entity.Topic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,6 @@
 package entity;
 
+import com.uniweb.entity.Question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 class TestTest {
-    entity.Test test = null;
+    com.uniweb.entity.Test test = null;
 
     final List<Question> questions = new ArrayList<>();
     final List<Question> anotherQuestions = new ArrayList<>();
@@ -35,7 +36,7 @@ class TestTest {
 
     @BeforeEach
     void setUp() {
-        test = new entity.Test();
+        test = new com.uniweb.entity.Test();
         test.setId(id);
         test.setName(name);
         test.setComplexity(complexity);

@@ -1,5 +1,6 @@
 package entity;
 
+import com.uniweb.entity.Question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
