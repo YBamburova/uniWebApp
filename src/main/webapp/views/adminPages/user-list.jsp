@@ -1,33 +1,8 @@
-<%@ page import="java.io.UnsupportedEncodingException" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.util.ResourceBundle" %>
-
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"
          language="java" %>
 
-<%!
-    public String getResource(ResourceBundle resourceBundle, String resName) throws UnsupportedEncodingException, UnsupportedEncodingException {
-        return new String(resourceBundle.getString(resName).getBytes("ISO-8859-1"), "UTF-8");
-    }
-%>
-
-<% Locale currentLocale = new Locale((String) session.getAttribute("language"), (String) session.getAttribute("country"));
-    ResourceBundle resource = ResourceBundle.getBundle("main", currentLocale);
-
-    String LocaleAddUser = getResource(resource, "LocaleAddUser");
-    String LocaleUsername = getResource(resource, "LocaleUsername");
-    String LocaleName = getResource(resource, "LocaleName");
-    String LocaleSurname = getResource(resource, "LocaleSurname");
-    String LocaleEmail = getResource(resource, "LocaleEmail");
-    String LocaleUsers = getResource(resource, "LocaleUsers");
-    String LocaleType = getResource(resource, "LocaleType");
-    String LocaleActions = getResource(resource, "LocaleActions");
-    String LocaleBlockUser = getResource(resource, "LocaleBlockUser");
-    String LocaleEdit = getResource(resource, "LocaleEdit");
-    String LocaleUnblock = getResource(resource, "LocaleUnblock");
-
-%>
 <html>
 <%
     String username = (String) session.getAttribute("username");
@@ -37,68 +12,77 @@
     }
 %>
 <head>
-    <title><%=LocaleUsers%>
+    <title><spring:message code="LocaleUsers"/>
     </title>
     <link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="header_admin.jsp"/>
-<div class="container" style="padding-top: 10px">
-    <h3><%=LocaleUsers%>
+<div class="container" style="padding-top: 10px; width: 80%; max-width: 100%">
+    <h3><spring:message code="LocaleUsers"/>
     </h3>
     <a href="${pageContext.request.contextPath}/users?action=ADD" class="btn btn-warning mb-4" style="" role="button"
-       data-bs-toggle="button"><%=LocaleAddUser%>
+       data-bs-toggle="button"><spring:message code="LocaleAddUser"/>
     </a>
     <table id="datatable" class="table table-hover">
         <thead>
         <tr class="thead-light">
-            <th><%=LocaleUsername%>
+            <th><spring:message code="LocaleUsername"/>
             </th>
-            <th><%=LocaleName%>
+            <th><spring:message code="LocaleName"/>
             </th>
-            <th><%=LocaleSurname%>
+            <th><spring:message code="LocaleSurname"/>
             </th>
-            <th><%=LocaleEmail%>
+            <th><spring:message code="LocaleEmail"/>
             </th>
-            <th><%=LocaleType%>
+            <th><spring:message code="LocaleType"/>
             </th>
-            <th><%=LocaleActions%>
+            <th><spring:message code="LocaleEducationalProgram"/>
+            </th>
+            <th><spring:message code="LocaleSupportLevel"/>
+            </th>
+            <th><spring:message code="LocaleAdditionalInfo"/>
+            </th>
+            <th><spring:message code="LocaleActions"/>
             </th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${list}" var="user">
-            <tr>
+            <tr class="${user.type == 'admin' ? 'active' : ''}">
                 <td>${user.username}</td>
                 <td>${user.name}</td>
                 <td>${user.surname}</td>
                 <td>${user.email}</td>
                 <td>${user.type}</td>
+                <td>${user.type == 'admin' ? '' : user.educationalProgram}</td>
+                <td>${user.type == 'admin' ? '' : user.supportLevel}</td>
+                <td>${user.type == 'admin' ? '' : user.additionalInfo}</td>
                 <c:if test="${user.isBlocked eq 'false' && user.type eq 'student'}">
                     <td>
-                        <a href="${pageContext.request.contextPath}/users/block?userName=${user.username}"
+                        <a href="${pageContext.request.contextPath}/users/block?id=${user.id}"
                            class="btn btn-warning" style="width: 150px" role="button"
-                           data-bs-toggle="button"><%=LocaleBlockUser%>
+                           data-bs-toggle="button"><spring:message code="LocaleBlockUser"/>
                         </a>
                         <a href="${pageContext.request.contextPath}/users?action=EDIT&id=${user.id}"
-                           class="btn btn-warning" style="" role="button" data-bs-toggle="button"><%=LocaleEdit%>
+                           class="btn btn-warning" style="" role="button" data-bs-toggle="button"><spring:message code="LocaleEdit"/>
                         </a>
                         <a href="${pageContext.request.contextPath}/delete?action=user&id=${user.id}"
-                           class="btn btn-danger" style="" role="button" data-bs-toggle="button">delete user
+                           class="btn btn-danger" style="" role="button" data-bs-toggle="button"><spring:message code="LocaleDelete"/>
                         </a>
                     </td>
                 </c:if>
                 <c:if test="${user.isBlocked eq 'true' && user.type eq 'student'}">
                     <td>
-                        <a href="${pageContext.request.contextPath}/users/unblock?userName=${user.username}"
+                        <a href="${pageContext.request.contextPath}/users/unblock?id=${user.id}"
                            class="btn btn-info" style="width: 150px" role="button"
-                           data-bs-toggle="button"><%=LocaleUnblock%>
+                           data-bs-toggle="button"><spring:message code="LocaleUnblock"/>
                         </a>
                         <a href="${pageContext.request.contextPath}/users?action=EDIT&id=${user.id}"
-                           class="btn btn-warning" style="" role="button" data-bs-toggle="button"><%=LocaleEdit%>
+                           class="btn btn-warning" style="" role="button" data-bs-toggle="button"><spring:message code="LocaleEdit"/>
                         </a>
                         <a href="${pageContext.request.contextPath}/delete?action=user&id=${user.id}"
-                           class="btn btn-danger" style="" role="button" data-bs-toggle="button">delete user
+                           class="btn btn-danger" style="" role="button" data-bs-toggle="button"><spring:message code="LocaleDelete"/>
                         </a>
                     </td>
                 </c:if>

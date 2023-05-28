@@ -1,27 +1,30 @@
 package com.uniweb.controller;
 
-import com.uniweb.dao.QuestionDAO;
-import com.uniweb.dao.QuestionDAOImpl;
-import com.uniweb.dao.TestDAO;
-import com.uniweb.dao.TestDAOImpl;
-import com.uniweb.dao.UserDAO;
-import com.uniweb.dao.UserDAOImpl;
+import com.uniweb.service.QuestionService;
+import com.uniweb.service.TestService;
+import com.uniweb.service.UserService;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/delete")
 public class DeleteController {
 
+    private final UserService userService;
+    private final TestService testService;
+    private final QuestionService questionService;
+
     @GetMapping
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String action = req.getParameter("action");
         HttpSession session = req.getSession();
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/");
@@ -49,18 +52,12 @@ public class DeleteController {
     }
 
     public void deleteTest(String testID) {
-        TestDAO testDAO = new TestDAOImpl();
-        testDAO.delete(testID);
-
+        testService.delete(testID);
     }
-
     public void deleteUser(String userID) {
-        UserDAO userDAO = new UserDAOImpl();
-        userDAO.delete(userID);
+        userService.delete(userID);
     }
-
     public void deleteQuestion(String questionID) {
-        QuestionDAO questionDAO = new QuestionDAOImpl();
-        questionDAO.delete(questionID);
+        questionService.delete(questionID);
     }
 }

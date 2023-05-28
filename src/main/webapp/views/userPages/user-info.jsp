@@ -1,33 +1,8 @@
-<%@ page import="java.io.UnsupportedEncodingException" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.util.ResourceBundle" %>
-
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"
          language="java" %>
 
-<%!
-    public String getResource(ResourceBundle resourceBundle, String resName) throws UnsupportedEncodingException, UnsupportedEncodingException {
-        return new String(resourceBundle.getString(resName).getBytes("ISO-8859-1"), "UTF-8");
-    }
-%>
-<% Locale currentLocale = new Locale((String) session.getAttribute("language"), (String) session.getAttribute("country"));
-    ResourceBundle resource = ResourceBundle.getBundle("main", currentLocale);
-
-    String LocaleAddUser = getResource(resource, "LocaleAddUser");
-    String LocaleUsername = getResource(resource, "LocaleUsername");
-    String LocaleName = getResource(resource, "LocaleName");
-    String LocaleSurname = getResource(resource, "LocaleSurname");
-    String LocaleEmail = getResource(resource, "LocaleEmail");
-    String LocaleUsers = getResource(resource, "LocaleUsers");
-    String LocaleType = getResource(resource, "LocaleType");
-    String LocaleActions = getResource(resource, "LocaleActions");
-    String LocaleBlockUser = getResource(resource, "LocaleBlockUser");
-    String LocaleEdit = getResource(resource, "LocaleEdit");
-    String LocaleWelcome = getResource(resource, "LocaleWelcome");
-    String LocaleStudentInfo = getResource(resource, "LocaleStudentInfo");
-
-%>
 <html>
 <%
 
@@ -39,16 +14,15 @@
     }
 %>
 <head>
-    <title><%=LocaleStudentInfo%>
+    <title><spring:message code="LocaleStudentInfo"/>
     </title>
     <link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
 </head>
 
 <body>
 <jsp:include page="header_user.jsp"/>
-<div class="" style="position: absolute; right:20px" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="" style="position: absolute; right:20px" role="alert" aria-live="assertive"
+     aria-atomic="true">
     <div class="toast-header">
     </div>
     <div class="toast-body">
@@ -56,22 +30,23 @@
     </div>
 </div>
 
-
 <div class="container" style="padding-top: 10px">
-    <h4><%=LocaleWelcome%>, ${user.name} ${user.surname}</h4>
+    <h4><spring:message code="LocaleWelcome"/>, ${user.name} ${user.surname}</h4>
     <table class="table table-hover">
         <tr class="thead-light">
-            <th><%=LocaleUsername%>
+            <th><spring:message code="LocaleUsername"/>
             </th>
-            <th><%=LocaleName%>
+            <th><spring:message code="LocaleName"/>
             </th>
-            <th><%=LocaleSurname%>
+            <th><spring:message code="LocaleSurname"/>
             </th>
-            <th><%=LocaleEmail%>
+            <th><spring:message code="LocaleEmail"/>
             </th>
-            <th><%=LocaleType%>
+            <th><spring:message code="LocaleType"/>
             </th>
-            <th><%=LocaleActions%>
+            <th><spring:message code="LocaleSupportLevel"/>
+            </th>
+            <th><spring:message code="LocaleActions"/>
             </th>
         </tr>
         <tr>
@@ -80,7 +55,9 @@
             <td>${user.surname}</td>
             <td>${user.email}</td>
             <td>${user.type}</td>
-            <td><a href="${pageContext.request.contextPath}/users?action=EDIT" class="btn btn-warning"><%=LocaleEdit%>
+            <td>${user.supportLevel}</td>
+            <td><a href="${pageContext.request.contextPath}/users?action=EDIT"
+                   class="btn btn-warning"><spring:message code="LocaleEdit"/>
             </a></td>
         </tr>
     </table>

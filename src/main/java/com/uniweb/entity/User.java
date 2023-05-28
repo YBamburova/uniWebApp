@@ -1,90 +1,52 @@
 package com.uniweb.entity;
 
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity
+@Getter
+@Setter
+@ToString
+@Table(name = "users")
 public class User {
-    private Integer id;
-    private String username;
-    private String name;
-    private String surname;
-    private String email;
-    private String password;
-    private String isBlocked;
-    private String type;
 
-    public Integer getId() {
-        return id;
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
+  @Column(unique = true)
+  private String username;
+  private String name;
+  private String surname;
+  @Column(unique = true)
+  private String email;
+  private String password;
+  private boolean isBlocked;
+  @Column(columnDefinition = "enum('student','admin')")
+  @Enumerated(EnumType.STRING)
+  private UserType type = UserType.student;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  @Column(columnDefinition = "enum('typical', 'modified', 'adaptive')")
+  @Enumerated(EnumType.STRING)
+  private EducationalProgram educationalProgram = EducationalProgram.typical;
+  private int supportLevel;
 
-    public String getUsername() {
-        return username;
-    }
+  private String additionalInfo;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  @ManyToMany(mappedBy = "assignedStudents")
+  private Set<Course> courses;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getIsBlocked() {
-        return isBlocked;
-    }
-
-    public void setIsBlocked(String isBlocked) {
-        this.isBlocked = isBlocked;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", isBlocked='" + isBlocked + '\'' +
-                ", type='" + type + '\'' +
-                '}';
-    }
+  public boolean getIsBlocked() {
+    return isBlocked;
+  }
 }

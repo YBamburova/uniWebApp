@@ -1,10 +1,10 @@
-package com.uniweb.dao;
+package com.uniweb.service;
 
 import com.uniweb.entity.Test;
-
+import com.uniweb.entity.TestPass;
 import java.util.List;
 
-public interface TestDAO {
+public interface TestService {
     List<Test> get();
 
     Test get(int id);

@@ -1,29 +1,9 @@
-<%@ page import="java.io.UnsupportedEncodingException" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.util.ResourceBundle" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%!
-    public String getResource(ResourceBundle resourceBundle, String resName) throws UnsupportedEncodingException {
-        return new String(resourceBundle.getString(resName).getBytes("ISO-8859-1"), "UTF-8");
-    }
-%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
-<% Locale currentLocale = new Locale((String) session.getAttribute("language"), (String) session.getAttribute("country"));
-    ResourceBundle resource = ResourceBundle.getBundle("main", currentLocale);
-    String LocaleUsername = getResource(resource, "LocaleUsername");
-    String LocaleName = getResource(resource, "LocaleName");
-    String LocaleSurname = getResource(resource, "LocaleSurname");
-    String LocaleEmail = getResource(resource, "LocaleEmail");
-    String LocalePassword = getResource(resource, "LocalePassword");
-    String LocalePassDescription = getResource(resource, "LocalePassDescription");
-    String LocaleSubmit = getResource(resource, "LocaleSubmit");
-    String LocaleSignUp = getResource(resource, "LocaleSignUp");
-%>
 <html>
-
-
 <head>
-    <title><%=LocaleSignUp%>></title>
+    <title><spring:message code="LocaleSignUp"/></title>
     <link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -36,39 +16,39 @@
 
             <form action="${pageContext.request.contextPath}/users" method="post">
                 <div class="mb-3">
-                    <label for="username" class="form-label"><%=LocaleUsername%>
+                    <label for="username" class="form-label"><spring:message code="LocaleUsername"/>
                     </label>
                     <input minlength="3" maxlength="45" id="username" class="form-control"
-                           placeholder="<%=LocaleUsername%>" type="text" name="username" required><br>
+                           placeholder="<spring:message code="LocaleUsername"/>" type="text" name="username" required><br>
                 </div>
                 <div class="mb-3">
-                    <label for="name" class="form-label"><%=LocaleName%>
+                    <label for="name" class="form-label"><spring:message code="LocaleName"/>
                     </label>
-                    <input minlength="3" maxlength="45" id="name" class="form-control" placeholder="<%=LocaleName%>"
+                    <input minlength="3" maxlength="45" id="name" class="form-control" placeholder="<spring:message code="LocaleName"/>"
                            type="text" name="name" required><br>
                 </div>
                 <div class="mb-3">
-                    <label for="surname" class="form-label"><%=LocaleSurname%>
+                    <label for="surname" class="form-label"><spring:message code="LocaleSurname"/>
                     </label>
                     <input minlength="3" maxlength="45" id="surname" class="form-control"
-                           placeholder="<%=LocaleSurname%>" type="text" name="surname" required><br>
+                           placeholder="<spring:message code="LocaleSurname"/>" type="text" name="surname" required><br>
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label"><%=LocaleEmail%>
+                    <label for="email" class="form-label"><spring:message code="LocaleEmail"/>
                     </label>
                     <input pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" maxlength="45" id="email" class="form-control"
-                           placeholder="<%=LocaleEmail%>" type="text" name="email" required><br>
+                           placeholder="<spring:message code="LocaleEmail"/>" type="text" name="email" required><br>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label"><%=LocalePassword%>*</label>
+                    <label for="password" class="form-label"><spring:message code="LocalePassword"/>*</label>
                     <input pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" maxlength="45" minlength="8"
-                           id="password" class="form-control" placeholder="<%=LocalePassword%>"
+                           id="password" class="form-control" placeholder="<spring:message code="LocalePassword"/>"
                            value="<%=session.getAttribute("password")%>" type="password" name="password" required><br>
-                    <p class="text-info">*<%=LocalePassDescription%>
+                    <p class="text-info">*<spring:message code="LocalePassDescription"/>
                     </p>
                 </div>
                 <input type="hidden" name="id">
-                <button type="submit" class="btn btn-primary"><%=LocaleSubmit%>
+                <button type="submit" class="btn btn-primary"><spring:message code="LocaleSubmit"/>
                 </button>
             </form>
         </div>

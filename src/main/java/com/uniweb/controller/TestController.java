@@ -1,14 +1,11 @@
 package com.uniweb.controller;
 
-import com.uniweb.dao.PassedTestDAO;
-import com.uniweb.dao.PassedTestDAOImpl;
-import com.uniweb.dao.TestDAO;
-import com.uniweb.dao.TestDAOImpl;
-import com.uniweb.dao.TopicDAO;
-import com.uniweb.dao.TopicDAOImpl;
 import com.uniweb.entity.PassedTest;
 import com.uniweb.entity.Test;
 import com.uniweb.entity.Topic;
+import com.uniweb.service.PassedTestService;
+import com.uniweb.service.TestService;
+import com.uniweb.service.TopicService;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -17,27 +14,25 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/tests")
 public class TestController {
-    TestDAO testDAO = null;
-    PassedTestDAO passedTestDAO = null;
-    TopicDAO topicDAO = null;
 
-    public TestController() {
-        testDAO = new TestDAOImpl();
-        passedTestDAO = new PassedTestDAOImpl();
-        topicDAO = new TopicDAOImpl();
+    private final TestService testService;
+    private final PassedTestService passedTestService;
 
-    }
+    private final TopicService topicService;
+
 
     @GetMapping
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         String type = session.getAttribute("type").toString();
 
@@ -47,19 +42,18 @@ public class TestController {
 
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/adminPages/test-add.jsp");
                 try {
-                    List<Topic> topicList = topicDAO.getAllTopics();
+                    List<Topic> topicList = topicService.getAllTopics();
                     req.setAttribute("topics", topicList);
                     requestDispatcher.forward(req, resp);
                 } catch (ServletException | IOException e) {
                     e.printStackTrace();
                 }
-            }
-            if (action != null && action.equals("EDIT")) {
-                List<Topic> topicList = topicDAO.getAllTopics();
+            } else if (action != null && action.equals("EDIT")) {
+                List<Topic> topicList = topicService.getAllTopics();
                 req.setAttribute("topics", topicList);
                 String testToEdit = req.getParameter("testID");
                 if (testToEdit != null) {
-                    req.setAttribute("test", testDAO.get(Integer.parseInt(testToEdit)));
+                    req.setAttribute("test", testService.get(Integer.parseInt(testToEdit)));
                 }
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/adminPages/test-edit.jsp");
                 try {
@@ -68,9 +62,9 @@ public class TestController {
                     e.printStackTrace();
                 }
             } else {
-                List<PassedTest> passedTestList = passedTestDAO.get((Integer) session.getAttribute("userID"));
-                List<Test> testsList = testDAO.get();
-                List<Topic> topicList = topicDAO.getAllTopics();
+                List<PassedTest> passedTestList = passedTestService.get((Integer) session.getAttribute("userID"));
+                List<Test> testsList = testService.get();
+                List<Topic> topicList = topicService.getAllTopics();
                 req.setAttribute("list", testsList);
                 req.setAttribute("topics", topicList);
                 req.setAttribute("listpassed", passedTestList);
@@ -85,9 +79,9 @@ public class TestController {
             }
         }
         if (type.equals("student")) {
-            List<PassedTest> passedTestList = passedTestDAO.get((Integer) session.getAttribute("userID"));
-            List<Test> testsList = testDAO.get();
-            List<Topic> topicList = topicDAO.getAllTopics();
+            List<PassedTest> passedTestList = passedTestService.get((Integer) session.getAttribute("userID"));
+            List<Test> testsList = testService.get();
+            List<Topic> topicList = topicService.getAllTopics();
             req.setAttribute("list", testsList);
             req.setAttribute("topics", topicList);
             req.setAttribute("listpassed", passedTestList);
@@ -135,7 +129,6 @@ public class TestController {
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
-
             Test test = new Test();
             test.setName(name);
             test.setComplexity(complexity);
@@ -146,19 +139,15 @@ public class TestController {
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
-
-            if (testDAO.update(test)) {
+            if (testService.update(test)) {
                 req.getSession().setAttribute("message", "test updated successfully");
                 req.setAttribute("page", "test");
             }
-
             try {
                 resp.sendRedirect(req.getContextPath() + "/tests");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
         } else {
 
             String name = req.getParameter("name");
@@ -186,8 +175,9 @@ public class TestController {
             test.setComplexity(complexity);
             test.setTimeForTest(timeForTest);
             test.setTopic(topic);
+            test.setNumberOfRequests(0);
 
-            if (testDAO.save(test)) {
+            if (testService.save(test)) {
                 req.getSession().setAttribute("message", "test saved successfully");
                 req.setAttribute("page", "test");
             }

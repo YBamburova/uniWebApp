@@ -27,13 +27,16 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`
 (
     `id`        int                      NOT NULL AUTO_INCREMENT,
-    `username`  varchar(45)              NOT NULL,
-    `name`      varchar(45)              NOT NULL,
-    `surname`   varchar(45)              NOT NULL,
-    `email`     varchar(45)              NOT NULL,
-    `password`  varchar(45)              NOT NULL,
-    `isBlocked` enum ('true','false')    NOT NULL DEFAULT 'false',
+    `username`  varchar(255)              NOT NULL,
+    `name`      varchar(255)              NOT NULL,
+    `surname`   varchar(255)             NOT NULL,
+    `email`     varchar(255)              NOT NULL,
+    `password`  varchar(255)              NOT NULL,
+    `is_blocked` tinyint(1)               NOT NULL DEFAULT 0,
     `type`      enum ('student','admin') NOT NULL DEFAULT 'student',
+    `educational_program`      enum ('typical', 'modified', 'adaptive') NOT NULL DEFAULT 'typical',
+    `support_level` int           NOT NULL default 0,
+    `additional_info` varchar(255),
     PRIMARY KEY (`id`),
     UNIQUE KEY `idusers_UNIQUE` (`id`),
     UNIQUE KEY `login_UNIQUE` (`username`),
@@ -51,13 +54,13 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users`
     DISABLE KEYS */;
 INSERT INTO `users`
-VALUES (22, 'MaradRoman', 'Roma', 'Marad', 'maradroman@mail.com', '123456789', 'false', 'admin'),
-       (60, 'LindaRamirez', 'Linda', 'Ramirez', 'linda.ramirez@example.com', 'OuUenWtZNM3xsSt', 'false', 'student'),
-       (61, 'ShellyWoods', 'Shelly', 'Woods', 'shelly.woods@example.com', '0Ft1zEQNc1qIGqD', 'false', 'student'),
-       (62, 'HeatherSimpson', 'Heather', 'Simpson', 'heather.simpson@example.com', 'G9i3bQbeijnMt9f', 'false',
-        'student'),
-       (63, 'AlexBurke', 'Alex1', 'Burke', 'alex.burke@example.com', 'TdthXZ8XwOkUaIq', 'false', 'student'),
-       (64, 'ChristyEvans', 'Christy', 'Evans', 'christy.evans@example.com', 'TmYnCkucmZbnSe5', 'false', 'student');
+VALUES (22, 'MaradRoman', 'Roma', 'Marad', 'maradroman@mail.com', '123456789', 0, 'admin', 'typical', 0, null),
+       (60, 'LindaRamirez', 'Linda', 'Ramirez', 'linda.ramirez@example.com', 'OuUenWtZNM3xsSt', 0, 'student', 'typical', 0, null),
+       (61, 'ShellyWoods', 'Shelly', 'Woods', 'shelly.woods@example.com', '0Ft1zEQNc1qIGqD', 0, 'student', 'typical', 1, null),
+       (62, 'HeatherSimpson', 'Heather', 'Simpson', 'heather.simpson@example.com', 'G9i3bQbeijnMt9f', 0,
+        'student', 'typical', 2, null),
+       (63, 'AlexBurke', 'Alex1', 'Burke', 'alex.burke@example.com', 'TdthXZ8XwOkUaIq', 0, 'student', 'typical', 3, null),
+       (64, 'ChristyEvans', 'Christy', 'Evans', 'christy.evans@example.com', 'TmYnCkucmZbnSe5', 0, 'student', 'typical', 4, null);
 /*!40000 ALTER TABLE `users`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -109,15 +112,15 @@ CREATE TABLE `question`
 (
     `id`          int                   NOT NULL AUTO_INCREMENT,
     `test_id`     int                   NOT NULL,
-    `text`        varchar(2000)         NOT NULL,
-    `option1`     varchar(1500)         NOT NULL,
-    `option2`     varchar(1500)         NOT NULL,
-    `option3`     varchar(1500)         NOT NULL,
-    `option4`     varchar(1500)         NOT NULL,
-    `o1IsCorrect` enum ('true','false') NOT NULL DEFAULT 'false',
-    `o2IsCorrect` enum ('true','false') NOT NULL DEFAULT 'false',
-    `o3IsCorrect` enum ('true','false') NOT NULL DEFAULT 'false',
-    `o4IsCorrect` enum ('true','false') NOT NULL DEFAULT 'false',
+    `text`        varchar(255)          NOT NULL,
+    `option1`     varchar(255)         NOT NULL,
+    `option2`     varchar(255)         NOT NULL,
+    `option3`     varchar(255)         NOT NULL,
+    `option4`     varchar(255)         NOT NULL,
+    `o1is_correct` tinyint(1)               NOT NULL DEFAULT 0,
+    `o2is_correct` tinyint(1)               NOT NULL DEFAULT 0,
+    `o3is_correct` tinyint(1)               NOT NULL DEFAULT 0,
+    `o4is_correct` tinyint(1)               NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`),
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE = InnoDB
@@ -133,27 +136,27 @@ LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question`
     DISABLE KEYS */;
 INSERT INTO `question`
-VALUES (33, 1, 'CPP', 'right', '---', '---', '---', 'true', 'false', 'false', 'false'),
-       (34, 1, 'question', 'right', 'wrong', 'wrong', 'right', 'true', 'false', 'false', 'true'),
-       (35, 1, 'question', 'right', 'right', 'wrong', 'wrong', 'true', 'true', 'false', 'false'),
+VALUES (33, 1, 'CPP', 'right', '---', '---', '---', 1, 0, 0, 0),
+       (34, 1, 'question', 'right', 'wrong', 'wrong', 'right', 1, 0, 0, 1),
+       (35, 1, 'question', 'right', 'right', 'wrong', 'wrong', 1, 1, 0, 0),
        (36, 1, 'запитання', 'правильна відповідь', 'неправильна відповідь', 'неправильна відповідь',
-        'неправильна відповідь', 'true', 'false', 'false', 'false'),
-       (37, 2, 'rwerwe', '321312', '4214124124', '32423423', '4123321312', 'false', 'false', 'true', 'false'),
-       (38, 1, 'ugyhgfhgdhdg', 'hgfdhgdhdghgd', 'hgdhdg', 'hgfhgh', 'dhdhd', 'true', 'false', 'false', 'false'),
-       (39, 1, 'ппапаап', 'апаппаапап', 'паапапап', 'паапап', 'апапапапаап', 'true', 'true', 'false', 'false'),
-       (40, 2, 'опраоароа', 'ораоа', 'опренггк', 'гкгкг', 'кгкгкг', 'true', 'true', 'false', 'false'),
-       (41, 3, 'erqweqweqweqweqweqweqw', '+++++', '-----', '-----', '+++++', 'true', 'false', 'false', 'true'),
-       (42, 31, 'hgfhgdhdghdghdg', '+++++', '+++++', '_______', '_______', 'true', 'true', 'false', 'false'),
-       (43, 32, 'ghdhgdhdghdghdghd', '++++++', 'fgsdgfsgfsd', 'gsdfgsdfgfsd', 'gsdfgsdfgsdf', 'true', 'false', 'false',
-        'false'),
-       (44, 34, 'bbvbvbvb', '4242234', '4224243', '342424', '4234234423', 'false', 'false', 'false', 'true'),
-       (45, 32, 'fdsfsd', 'fdsfsdfsd', 'fsdfsd', 'fsdfsd', 'ffsdfsdfsd', 'false', 'false', 'true', 'false'),
+        'неправильна відповідь', 1, 0, 0, 0),
+       (37, 2, 'rwerwe', '321312', '4214124124', '32423423', '4123321312', 0, 0, 1, 0),
+       (38, 1, 'ugyhgfhgdhdg', 'hgfdhgdhdghgd', 'hgdhdg', 'hgfhgh', 'dhdhd', 1, 0, 0, 0),
+       (39, 1, 'ппапаап', 'апаппаапап', 'паапапап', 'паапап', 'апапапапаап', 1, 1, 0, 0),
+       (40, 2, 'опраоароа', 'ораоа', 'опренггк', 'гкгкг', 'кгкгкг', 1, 1, 0, 0),
+       (41, 3, 'erqweqweqweqweqweqweqw', '+++++', '-----', '-----', '+++++', 1, 0, 0, 1),
+       (42, 31, 'hgfhgdhdghdghdg', '+++++', '+++++', '_______', '_______', 1, 1, 0, 0),
+       (43, 32, 'ghdhgdhdghdghdghd', '++++++', 'fgsdgfsgfsd', 'gsdfgsdfgfsd', 'gsdfgsdfgsdf', 1, 0, 0,
+        0),
+       (44, 34, 'bbvbvbvb', '4242234', '4224243', '342424', '4234234423', 0, 0, 0, 1),
+       (45, 32, 'fdsfsd', 'fdsfsdfsd', 'fsdfsd', 'fsdfsd', 'ffsdfsdfsd', 0, 0, 1, 0),
        (46, 40, 'What of the following is the default value of a local variable?', 'null', '0',
-        'Depends upon the type of variable', 'Not assigned', 'false', 'false', 'false', 'true'),
-       (47, 40, 'What is the default value of float variable?', '0.0d', '0.0f', '0', 'not defined', 'false', 'true',
-        'false', 'false'),
-       (48, 40, 'What is the default value of Object variable?', 'undefined', '0', 'null', 'not defined', 'false',
-        'false', 'true', 'false');
+        'Depends upon the type of variable', 'Not assigned', 0, 0, 0, 1),
+       (47, 40, 'What is the default value of float variable?', '0.0d', '0.0f', '0', 'not defined', 0, 1,
+        0, 0),
+       (48, 40, 'What is the default value of Object variable?', 'undefined', '0', 'null', 'not defined', 0,
+        0, 1, 0);
 /*!40000 ALTER TABLE `question`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -235,12 +238,29 @@ VALUES (40, 'Java Basics Quiz', 2, 3, 30, 2),
     ENABLE KEYS */;
 UNLOCK TABLES;
 
-/*!40101 SET SQL_MODE = @OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES = @OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-24 14:25:42
+DROP TABLE IF EXISTS `course`;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `course`
+(
+    `id`                 int         NOT NULL AUTO_INCREMENT,
+    `name`               varchar(45) NOT NULL,
+    `complexity`         int         NOT NULL,
+    `content`            text         NOT NULL,
+    `educational_program`      enum ('typical', 'modified', 'adaptive') NOT NULL DEFAULT 'typical',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+DROP TABLE IF EXISTS `user_course`;
+CREATE TABLE `user_course` (
+                                    `user_id` int NOT NULL,
+                                    `course_id` int NOT NULL,
+                                    PRIMARY KEY (`user_id`,`course_id`),
+                                    KEY `user_id` (`user_id`),
+                                    CONSTRAINT `user_course_ibfk_1`
+                                        FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+                                    CONSTRAINT `user_course_ibfk_2`
+                                        FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -1,10 +1,9 @@
-package com.uniweb.dao;
+package com.uniweb.service;
 
 import com.uniweb.entity.Topic;
-
 import java.util.List;
 
-public interface TopicDAO {
+public interface TopicService {
     List<Topic> getAllTopics();
     Topic getTopicByID(String topicID);
     boolean save(Topic topic);

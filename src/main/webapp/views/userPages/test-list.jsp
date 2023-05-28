@@ -1,29 +1,8 @@
-<%@ page import="java.io.UnsupportedEncodingException" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.util.ResourceBundle" %>
-
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"
          language="java" %>
 
-<%!
-    public String getResource(ResourceBundle resourceBundle, String resName) throws UnsupportedEncodingException, UnsupportedEncodingException {
-        return new String(resourceBundle.getString(resName).getBytes("ISO-8859-1"), "UTF-8");
-    }
-%>
-
-<% Locale currentLocale = new Locale((String) session.getAttribute("language"), (String) session.getAttribute("country"));
-    ResourceBundle resource = ResourceBundle.getBundle("main", currentLocale);
-    String LocaleTests = getResource(resource, "LocaleTests");
-    String LocaleAddTest = getResource(resource, "LocaleAddTest");
-    String LocaleTestName = getResource(resource, "LocaleTestName");
-    String LocaleComplexity = getResource(resource, "LocaleComplexity");
-    String LocaleNumberOfRequests = getResource(resource, "LocaleNumberOfRequests");
-    String LocaleTimeForTest = getResource(resource, "LocaleTimeForTest");
-    String LocaleTopic = getResource(resource, "LocaleTopic");
-    String LocaleQuestion = getResource(resource, "LocaleQuestion");
-    String LocaleAddQuestion = getResource(resource, "LocaleAddQuestion");
-%>
 <html>
 <%
     String username = (String) session.getAttribute("username");
@@ -34,32 +13,34 @@
 %>
 <head>
     <META http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title><%=LocaleTests%>
+    <title><spring:message code="LocaleTests"/>
     </title>
     <link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.css"/>
 </head>
 <body>
 <jsp:include page="header_user.jsp"/>
 <div class="container" style="padding-top: 10px; margin-bottom: 100px">
-    <h3><%=LocaleTests%>
+    <h3><spring:message code="LocaleTests"/>
     </h3>
     <table id="datatable" class="table table-hover">
         <thead>
         <tr class="thead-light">
             <th>ID</th>
-            <th><%=LocaleTestName%>
+            <th><spring:message code="LocaleTestName"/>
             </th>
-            <th><%=LocaleComplexity%>
+            <th><spring:message code="LocaleComplexity"/>
             </th>
-            <th><%=LocaleNumberOfRequests%>
+            <th><spring:message code="LocaleNumberOfRequests"/>
             </th>
-            <th><%=LocaleTimeForTest%>
+            <th><spring:message code="LocaleTimeForTest"/>
             </th>
-                        <th><%=LocaleTopic%></th>
-            <th><%=LocaleQuestion%>
+            <th><spring:message code="LocaleTopic"/>
             </th>
-            <th><%=LocaleAddQuestion%>
+            <th><spring:message code="LocaleQuestion"/>
+            </th>
+            <th><spring:message code="LocaleAddQuestion"/>
             </th>
         </tr>
         </thead>
@@ -104,13 +85,14 @@
     </table>
 </div>
 <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
+<script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#datatable').DataTable({
-            "lengthChange": false
-        });
-    })
+  $(document).ready(function () {
+    $('#datatable').DataTable({
+      "lengthChange": false
+    });
+  })
 </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package entity;
 
 import com.uniweb.entity.User;
+import com.uniweb.entity.UserType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,8 +15,8 @@ class UserTest {
     final String surname = "Pearson";
     final String email = "isaiah.pearson@example.com";
     final String password = "nYc9dqlh";
-    final String isBlocked = "false";
-    final String type = "student";
+    final boolean isBlocked = false;
+    final UserType type = UserType.student;
 
     final Integer anotherId = 35;
     final String anotherUsername = "GeorgiaJennings";
@@ -23,8 +24,8 @@ class UserTest {
     final String anotherSurname = "Jennings";
     final String anotherEmail = "georgia.jennings@example.com";
     final String anotherPassword = "6MihNUav";
-    final String anotherIsBlocked = "true";
-    final String anotherType = "admin";
+    final boolean anotherIsBlocked = true;
+    final UserType anotherType = UserType.admin;
 
     final String toString = "User{id="+id+", username='"+username+"', name='"+name+"', surname='"+surname+"', email='"+email+"', password='"+password+"', isBlocked='"+isBlocked+"', type='"+type+"'}";
 
@@ -38,7 +39,7 @@ class UserTest {
         user.setSurname(surname);
         user.setEmail(email);
         user.setPassword(password);
-        user.setIsBlocked(isBlocked);
+        user.setBlocked(isBlocked);
         user.setType(type);
     }
 
@@ -115,7 +116,7 @@ class UserTest {
 
     @Test
     void setIsBlocked() {
-        user.setIsBlocked(anotherIsBlocked);
+        user.setBlocked(anotherIsBlocked);
         assertThat(anotherIsBlocked, equalTo(user.getIsBlocked()));
     }
 

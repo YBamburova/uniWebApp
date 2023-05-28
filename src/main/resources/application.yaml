@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: uni-web-application
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/final_project?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+
+  jpa:
+    database: MYSQL
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: validate

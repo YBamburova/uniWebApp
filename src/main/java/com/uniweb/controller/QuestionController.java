@@ -1,53 +1,47 @@
 package com.uniweb.controller;
 
-import com.uniweb.dao.QuestionDAO;
-import com.uniweb.dao.QuestionDAOImpl;
 import com.uniweb.entity.Question;
-
+import com.uniweb.entity.Test;
+import com.uniweb.entity.UserType;
+import com.uniweb.repository.TestRepository;
+import com.uniweb.service.QuestionService;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/questions")
 public class QuestionController {
-    QuestionDAO questionDAO = null;
-
-    public QuestionController() {
-        questionDAO = new QuestionDAOImpl();
-    }
+    private final QuestionService questionService;
+    private final TestRepository testRepository;
 
     @GetMapping
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
-        String type = session.getAttribute("type").toString();
+        UserType type = (UserType) session.getAttribute("type");
 
-        if (type.equals("admin")) {
+        if (type == UserType.admin) {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/adminPages/question-add.jsp");
             try {
                 requestDispatcher.forward(req, resp);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (ServletException | IOException e) {
                 e.printStackTrace();
             }
         } else {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/");
             try {
                 requestDispatcher.forward(req, resp);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (ServletException | IOException e) {
                 e.printStackTrace();
             }
         }
@@ -60,10 +54,10 @@ public class QuestionController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String option1IsCorrect = "false";
-        String option2IsCorrect = "false";
-        String option3IsCorrect = "false";
-        String option4IsCorrect = "false";
+        boolean option1IsCorrect = false;
+        boolean option2IsCorrect = false;
+        boolean option3IsCorrect = false;
+        boolean option4IsCorrect = false;
 
         Integer testID = null;
         try {
@@ -77,40 +71,27 @@ public class QuestionController {
         String option3 = req.getParameter("option3");
         String option4 = req.getParameter("option4");
 
-        if (req.getParameter("option1IsCorrect") == null) {
-            option1IsCorrect = "false";
-        } else {
-            if (req.getParameter("option1IsCorrect").equals("true")) {
-                option1IsCorrect = "true";
-            }
+        if (req.getParameter("option1IsCorrect") != null && req.getParameter("option1IsCorrect").equals("true")) {
+          option1IsCorrect = true;
+        }
+        if (req.getParameter("option2IsCorrect") != null && req.getParameter("option2IsCorrect")
+            .equals("true")) {
+          option2IsCorrect = true;
         }
 
-        if (req.getParameter("option2IsCorrect") == null) {
-            option2IsCorrect = "false";
-        } else {
-            if (req.getParameter("option2IsCorrect").equals("true")) {
-                option2IsCorrect = "true";
-            }
+        if (req.getParameter("option3IsCorrect") != null && req.getParameter("option3IsCorrect")
+            .equals("true")) {
+          option3IsCorrect = true;
         }
-
-        if (req.getParameter("option3IsCorrect") == null) {
-            option3IsCorrect = "false";
-        } else {
-            if (req.getParameter("option3IsCorrect").equals("true")) {
-                option3IsCorrect = "true";
-            }
+        if (req.getParameter("option4IsCorrect") != null && req.getParameter("option4IsCorrect")
+            .equals("true")) {
+          option4IsCorrect = true;
         }
-
-        if (req.getParameter("option4IsCorrect") == null) {
-            option4IsCorrect = "false";
-        } else {
-            if (req.getParameter("option4IsCorrect").equals("true")) {
-                option4IsCorrect = "true";
-            }
-        }
-
         Question question = new Question();
-        question.setTestID(testID);
+        if (testID!= null) {
+            Test test = testRepository.findById(testID).orElseThrow(() -> new IllegalArgumentException("No test found"));
+            question.setTest(test);
+        }
         question.setText(text);
         question.setOption1(option1);
         question.setOption2(option2);
@@ -120,8 +101,7 @@ public class QuestionController {
         question.setOption2IsCorrect(option2IsCorrect);
         question.setOption3IsCorrect(option3IsCorrect);
         question.setOption4IsCorrect(option4IsCorrect);
-
-        if (questionDAO.save(question)) {
+        if (questionService.save(question)) {
             req.setAttribute("message", "Question saved successfully");
             req.setAttribute("page", "question");
         }

@@ -27,8 +27,8 @@ class PassedTestTest {
     void setUp() {
         passedTest = new PassedTest();
         passedTest.setId(id);
-        passedTest.setUserID(userID);
-        passedTest.setTestID(testID);
+        passedTest.setUserId(userID);
+        passedTest.setTestId(testID);
         passedTest.setResult(result);
         passedTest.setTimeSpent(timeSpent);
 
@@ -47,24 +47,24 @@ class PassedTestTest {
 
     @Test
     void getUserID() {
-        assertThat(userID, equalTo(passedTest.getUserID()));
+        assertThat(userID, equalTo(passedTest.getUserId()));
     }
 
     @Test
     void setUserID() {
-        passedTest.setUserID(anotherUserID);
-        assertThat(anotherUserID, equalTo(passedTest.getUserID()));
+        passedTest.setUserId(anotherUserID);
+        assertThat(anotherUserID, equalTo(passedTest.getUserId()));
     }
 
     @Test
     void getTestID() {
-        assertThat(testID, equalTo(passedTest.getTestID()));
+        assertThat(testID, equalTo(passedTest.getTestId()));
     }
 
     @Test
     void setTestID() {
-        passedTest.setTestID(anotherTestID);
-        assertThat(anotherTestID,equalTo(passedTest.getTestID()));
+        passedTest.setTestId(anotherTestID);
+        assertThat(anotherTestID,equalTo(passedTest.getTestId()));
     }
 
     @Test

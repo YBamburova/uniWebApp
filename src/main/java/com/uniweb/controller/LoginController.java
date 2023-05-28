@@ -1,34 +1,29 @@
 package com.uniweb.controller;
 
-import com.uniweb.dao.LoginDAO;
-import com.uniweb.dao.LoginDAOImpl;
-import com.uniweb.entity.Login;
-
+import com.uniweb.entity.User;
+import com.uniweb.service.UserService;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping({"/login", "/"})
 public class LoginController {
-    LoginDAO loginDAO = null;
 
-    public LoginController() {
-        loginDAO = new LoginDAOImpl();
-    }
+    private final UserService userService;
 
     @GetMapping
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
         if (session.getAttribute("language") == null && session.getAttribute("country") == null) {
             session.setAttribute("language", "ua");
@@ -52,12 +47,11 @@ public class LoginController {
             e.printStackTrace();
         }
         HttpSession session = req.getSession();
-        Login login = new Login();
-        login.setUsername(req.getParameter("username"));
-        login.setPassword(req.getParameter("password"));
-        Login authResult = loginDAO.authenticate(login);
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        User authResult = userService.authenticate(username, password);
         if (authResult != null) {
-            if (authResult.getIsBlocked().equals("true")) {
+            if (authResult.getIsBlocked()) {
                 try {
                     resp.sendRedirect("login?status=blocked");
                 } catch (IOException e) {

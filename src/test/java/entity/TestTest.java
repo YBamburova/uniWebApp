@@ -46,29 +46,27 @@ class TestTest {
         test.setQuestions(questions);
 
         question.setText("questionText");
-        question.setTestID(1);
         question.setId(1);
         question.setOption1("Option1");
-        question.setOption1IsCorrect("true");
+        question.setOption1IsCorrect(true);
         question.setOption2("Option2");
-        question.setOption2IsCorrect("true");
+        question.setOption2IsCorrect(true);
         question.setOption3("Option3");
-        question.setOption3IsCorrect("true");
+        question.setOption3IsCorrect(true);
         question.setOption4("Option4");
-        question.setOption4IsCorrect("true");
+        question.setOption4IsCorrect(true);
         questions.add(question);
 
         anotherQuestion.setText("questionText");
-        anotherQuestion.setTestID(2);
         anotherQuestion.setId(2);
         anotherQuestion.setOption1("Option1");
-        anotherQuestion.setOption1IsCorrect("false");
+        anotherQuestion.setOption1IsCorrect(false);
         anotherQuestion.setOption2("Option2");
-        anotherQuestion.setOption2IsCorrect("false");
+        anotherQuestion.setOption2IsCorrect(false);
         anotherQuestion.setOption3("Option3");
-        anotherQuestion.setOption3IsCorrect("false");
+        anotherQuestion.setOption3IsCorrect(false);
         anotherQuestion.setOption4("Option4");
-        anotherQuestion.setOption4IsCorrect("false");
+        anotherQuestion.setOption4IsCorrect(false);
         anotherQuestions.add(anotherQuestion);
     }
 
