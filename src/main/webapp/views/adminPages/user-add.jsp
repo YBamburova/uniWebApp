@@ -3,6 +3,13 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"
          language="java" %>
 
+<%
+    String[] levels = new String[]{"0", "1", "2", "3", "4", "5"};
+    pageContext.setAttribute("supportLevels", levels);
+    String[] educationalPrograms = new String[]{"typical", "modified", "adaptive"};
+    pageContext.setAttribute("educationalPrograms", educationalPrograms);
+%>
+
 <html>
 
 <head>

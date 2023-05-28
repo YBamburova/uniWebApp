@@ -44,10 +44,6 @@
             </th>
             <th><spring:message code="LocaleType"/>
             </th>
-            <th><spring:message code="LocaleSupportLevel"/>
-            </th>
-            <th><spring:message code="LocaleActions"/>
-            </th>
         </tr>
         <tr>
             <td>${user.username}</td>
@@ -55,10 +51,6 @@
             <td>${user.surname}</td>
             <td>${user.email}</td>
             <td>${user.type}</td>
-            <td>${user.supportLevel}</td>
-            <td><a href="${pageContext.request.contextPath}/users?action=EDIT"
-                   class="btn btn-warning"><spring:message code="LocaleEdit"/>
-            </a></td>
         </tr>
     </table>
 </div>

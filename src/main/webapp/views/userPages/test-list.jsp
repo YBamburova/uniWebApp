@@ -65,7 +65,7 @@
                     <c:set scope="request" var="flag" value="false"/>
                     <c:set scope="request" var="result" value=""/>
                     <c:forEach items="${listpassed}" var="passedTest">
-                        <c:if test="${test.id == passedTest.testID}">
+                        <c:if test="${test.id == passedTest.id}">
                             <c:set scope="request" var="flag" value="true"/>
                             <c:set scope="request" var="result" value="${passedTest.result}"/>
                         </c:if>
