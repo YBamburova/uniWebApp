@@ -4,7 +4,7 @@ import com.uniweb.entity.Course;
 import com.uniweb.entity.EducationalProgram;
 import com.uniweb.entity.User;
 import com.uniweb.entity.UserType;
-import com.uniweb.repository.UserRepository;
+import com.uniweb.repository.CourseRepository.CourseDuration;
 import com.uniweb.service.CourseService;
 import com.uniweb.service.UserService;
 import java.io.IOException;
@@ -55,11 +55,32 @@ public class CourseController {
         } else if (action.equals("edit_course")) {
           updateCoursePage(req, resp, id);
         }
-      }
-      if (type == UserType.student) {
-
+      } else if (type == UserType.student) {
+        if (action == null) {
+          listStudentCourses(req, resp);
+        } else if (action.equals("view")) {
+          viewStudentCourse(req, resp, id);
+        } else if (action.equals("finish_course")) {
+          finishCourse(req, resp, id);
+        } else if (action.equals("begin_course")) {
+          beginCourse( req, resp, id);
+        }
       }
     }
+  }
+
+  private void finishCourse(HttpServletRequest req, HttpServletResponse resp, String id) {
+    HttpSession session = req.getSession();
+    courseService.completeCourse(Integer.valueOf(id));
+    session.setAttribute("message", "Course with id: " + id + ", was completed.");
+    listStudentCourses(req, resp);
+  }
+
+  private void beginCourse(HttpServletRequest req, HttpServletResponse resp, String id) {
+    HttpSession session = req.getSession();
+    courseService.beginCourse(Integer.valueOf(id));
+    session.setAttribute("message", "Course with id: " + id + ", was started.");
+    viewStudentCourse(req, resp, id);
   }
 
   @PostMapping("/content")
@@ -123,12 +144,46 @@ public class CourseController {
     }
   }
 
+  public void listStudentCourses(HttpServletRequest req, HttpServletResponse resp) {
+    HttpSession session = req.getSession();
+    Integer id = (Integer) session.getAttribute("userID");
+    User user = userService.getByID(id);
+    Set<Course> list = user.getCourses();
+    list.forEach(c -> {
+      CourseDuration dates = courseService.getCourseStartEndDate(c.getId(), user.getId());
+      c.setStartedDate(dates.getStarteddate());
+      c.setCompletedDate(dates.getCompleteddate());
+    });
+    req.setAttribute("list", list);
+    req.setAttribute("message", req.getSession().getAttribute("message"));
+    RequestDispatcher requestDispatcher = req.getRequestDispatcher(
+        "/views/userPages/course-list.jsp");
+    try {
+      requestDispatcher.forward(req, resp);
+    } catch (ServletException | IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   public void viewCourse(HttpServletRequest req, HttpServletResponse resp, String id) {
     Course course = courseService.findById(Integer.valueOf(id));
     req.setAttribute("course", course);
     req.setAttribute("message", req.getSession().getAttribute("message"));
     RequestDispatcher requestDispatcher = req.getRequestDispatcher(
         "/views/adminPages/view-course.jsp");
+    try {
+      requestDispatcher.forward(req, resp);
+    } catch (ServletException | IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void viewStudentCourse(HttpServletRequest req, HttpServletResponse resp, String id) {
+    Course course = courseService.findById(Integer.valueOf(id));
+    req.setAttribute("course", course);
+    req.setAttribute("message", req.getSession().getAttribute("message"));
+    RequestDispatcher requestDispatcher = req.getRequestDispatcher(
+        "/views/userPages/view-course.jsp");
     try {
       requestDispatcher.forward(req, resp);
     } catch (ServletException | IOException e) {

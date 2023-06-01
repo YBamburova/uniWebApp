@@ -1,5 +1,6 @@
 package com.uniweb.entity;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -40,6 +42,11 @@ public class Course {
       joinColumns = {@JoinColumn(name = "course_id")},
       inverseJoinColumns = {@JoinColumn(name = "user_id")})
   private Set<User> assignedStudents;
+
+  @Transient
+  private Date startedDate;
+  @Transient
+  private Date completedDate;
 
   public String getAssignedStudentNames() {
     return assignedStudents.stream().map(u -> u.getName() + ", " + u.getUsername())
