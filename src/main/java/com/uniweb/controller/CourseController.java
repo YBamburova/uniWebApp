@@ -179,8 +179,12 @@ public class CourseController {
   }
 
   public void viewStudentCourse(HttpServletRequest req, HttpServletResponse resp, String id) {
+    HttpSession session = req.getSession();
+    Integer userId = (Integer) session.getAttribute("userID");
     Course course = courseService.findById(Integer.valueOf(id));
+    CourseDuration duration = courseService.getCourseStartEndDate(Integer.valueOf(id), userId);
     req.setAttribute("course", course);
+    req.setAttribute("completedDate", duration.getCompleteddate());
     req.setAttribute("message", req.getSession().getAttribute("message"));
     RequestDispatcher requestDispatcher = req.getRequestDispatcher(
         "/views/userPages/view-course.jsp");

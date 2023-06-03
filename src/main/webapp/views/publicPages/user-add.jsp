@@ -4,8 +4,7 @@
 <html>
 <head>
     <title><spring:message code="LocaleSignUp"/></title>
-    <link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>

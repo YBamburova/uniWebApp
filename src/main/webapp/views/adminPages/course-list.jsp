@@ -9,11 +9,11 @@
 <head>
     <title><spring:message code="LocaleCourses"/>
     </title>
-    <link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <jsp:include page="header_admin.jsp"/>
-<div class="container" style="padding-top: 10px; width: 80%; max-width: 100%">
+<div class="container" style="padding-top: 100px; width: 80%; max-width: 100%">
     <h3><spring:message code="LocaleCourses"/>
     </h3>
     <a href="${pageContext.request.contextPath}/courses?action=add_course" class="btn btn-warning mb-4"

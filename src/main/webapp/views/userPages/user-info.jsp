@@ -16,7 +16,7 @@
 <head>
     <title><spring:message code="LocaleStudentInfo"/>
     </title>
-    <link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
     </div>
 </div>
 
-<div class="container" style="padding-top: 10px">
+<div class="container" style="padding-top: 100px">
     <h4><spring:message code="LocaleWelcome"/>, ${user.name} ${user.surname}</h4>
     <table class="table table-hover">
         <tr class="thead-light">

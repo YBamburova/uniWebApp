@@ -17,11 +17,11 @@
 <head>
     <title><spring:message code="LocaleViewContent"/>
     </title>
-    <link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <jsp:include page="header_admin.jsp"/>
-<div class="container" style="padding-top: 10px; width: 80%; max-width: 100%;">
+<div class="container" style="padding-top: 100px; width: 80%; max-width: 100%;">
     <a href="${pageContext.request.contextPath}/courses" class="btn btn-primary mb-4" style=""
        role="button"><spring:message code="LocaleBack"/>
     </a>

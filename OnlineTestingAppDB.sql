@@ -54,13 +54,13 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users`
     DISABLE KEYS */;
 INSERT INTO `users`
-VALUES (22, 'MaradRoman', 'Roma', 'Marad', 'maradroman@mail.com', '123456789', 0, 'admin', 'typical', 0, null),
-       (60, 'LindaRamirez', 'Linda', 'Ramirez', 'linda.ramirez@example.com', 'OuUenWtZNM3xsSt', 0, 'student', 'typical', 0, null),
-       (61, 'ShellyWoods', 'Shelly', 'Woods', 'shelly.woods@example.com', '0Ft1zEQNc1qIGqD', 0, 'student', 'typical', 1, null),
-       (62, 'HeatherSimpson', 'Heather', 'Simpson', 'heather.simpson@example.com', 'G9i3bQbeijnMt9f', 0,
+VALUES (1, 'ybamburova', 'Yuliana', 'Bamburova', 'ybamburova@mail.com', 'ybamburova', 0, 'admin', 'typical', 0, null),
+       (2, 'nazar', 'Nazar', 'Сrosseyed', 'nazarokulist@example.com', 'nazar', 0, 'student', 'adaptive', 5, null),
+       (3, 'proman', 'Pan', 'Roman', 'shelly.woods@example.com', 'proman', 0, 'student', 'typical', 1, null),
+       (4, 'vasyl', 'Vasyl', 'Simpson', 'heather.simpson@example.com', 'vasyl', 0,
         'student', 'typical', 2, null),
-       (63, 'AlexBurke', 'Alex1', 'Burke', 'alex.burke@example.com', 'TdthXZ8XwOkUaIq', 0, 'student', 'typical', 3, null),
-       (64, 'ChristyEvans', 'Christy', 'Evans', 'christy.evans@example.com', 'TmYnCkucmZbnSe5', 0, 'student', 'typical', 4, null);
+       (5, 'alexburke', 'Alex', 'Burke', 'alex.burke@example.com', 'TdthXZ8XwOkUaIq', 0, 'student', 'typical', 3, null),
+       (6, 'christyevans', 'Christy', 'Evans', 'christy.evans@example.com', 'TmYnCkucmZbnSe5', 0, 'student', 'typical', 4, null);
 /*!40000 ALTER TABLE `users`
     ENABLE KEYS */;
 UNLOCK TABLES;

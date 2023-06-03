@@ -15,7 +15,7 @@
 <head>
     <title><spring:message code="LocaleAddTest"/>
     </title>
-    <link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 </head>
 
@@ -63,7 +63,7 @@
                            value="${test.topic}" type="text" name="topic" required><br>
                 </div>
 
-                <button type="submit" class="btn btn-primary"><spring:message code="LocaleSubmit"/>
+                <button type="submit" class="btn btn-lg btn-primary btn-block"><spring:message code="LocaleSubmit"/>
                 </button>
             </form>
         </div>

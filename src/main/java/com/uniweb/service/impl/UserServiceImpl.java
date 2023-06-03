@@ -1,10 +1,15 @@
 package com.uniweb.service.impl;
 
+import com.uniweb.entity.PassedTest;
 import com.uniweb.entity.User;
+import com.uniweb.entity.UserStatistics;
 import com.uniweb.entity.UserType;
+import com.uniweb.repository.CourseRepository;
 import com.uniweb.repository.UserRepository;
+import com.uniweb.service.PassedTestService;
 import com.uniweb.service.UserService;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
+  private final CourseRepository courseRepository;
+
+  private final PassedTestService passedTestService;
 
   @Override
   public List<User> findAll() {
@@ -90,5 +98,34 @@ public class UserServiceImpl implements UserService {
   @Override
   public User authenticate(String username, String password) {
     return userRepository.findByUsernameAndPassword(username, password).orElseThrow();
+  }
+
+  @Override
+  public UserStatistics getStatisticsById(int id) {
+    User user = userRepository.findById(id).orElseThrow();
+    AtomicInteger startedCourses = new AtomicInteger();
+    AtomicInteger completedCourses = new AtomicInteger();
+    user.getCourses().forEach(c -> {
+      if (courseRepository.getCourseStartedDateByCourseIdAndUserId(c.getId(), id) != null) {
+        if (courseRepository.getCourseCompletedDateByCourseIdAndUserId(c.getId(), id) != null) {
+          completedCourses.getAndIncrement();
+        } else {
+          startedCourses.incrementAndGet();
+        }
+      }
+    });
+    int assignedCourses = user.getCourses().size();
+    List<PassedTest> passedTests = passedTestService.get(id);
+    return UserStatistics.builder()
+        .assignedCourses(assignedCourses)
+        .startedCourses(startedCourses.get())
+        .completedCourses(completedCourses.get())
+        .takenTests(passedTests.size())
+        .passedTests((int) passedTests.stream().filter(t -> t.getResult() >= 60).count())
+        .failedTests((int) passedTests.stream().filter(t -> t.getResult() < 60).count())
+        .userId(id)
+        .name(user.getName())
+        .surname(user.getSurname())
+        .build();
   }
 }

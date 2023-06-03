@@ -15,16 +15,15 @@
     <META http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title><spring:message code="LocaleTests"/>
     </title>
-    <link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.css"/>
-
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
 <jsp:include page="header_admin.jsp"/>
 
-<div class="container" style="padding-top: 10px; margin-bottom: 100px">
+<div class="container" style="padding-top: 100px; margin-bottom: 100px">
     <h3><spring:message code="LocaleTests"/>
     </h3>
     <a href="${pageContext.request.contextPath}/tests?action=add" class="btn btn btn-warning mb-0" style="width: 200px"

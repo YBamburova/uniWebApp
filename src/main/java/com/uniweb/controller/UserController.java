@@ -2,6 +2,7 @@ package com.uniweb.controller;
 
 import com.uniweb.entity.EducationalProgram;
 import com.uniweb.entity.User;
+import com.uniweb.entity.UserStatistics;
 import com.uniweb.entity.UserType;
 import com.uniweb.service.UserService;
 import java.io.IOException;
@@ -23,225 +24,259 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
+  private final UserService userService;
 
-    @GetMapping
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  @GetMapping
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
 
-        HttpSession session = req.getSession();
-        String action = req.getParameter("action");
-        UserType type = (UserType) session.getAttribute("type");
-        if (type != null) {
+    HttpSession session = req.getSession();
+    String action = req.getParameter("action");
+    UserType type = (UserType) session.getAttribute("type");
+    if (type != null) {
 
-            if (type == UserType.admin) {
-                if (action == null) {
-                    try {
-                        listUsers(req, resp);
-                    } catch (ServletException | IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    if (action.equals("LIST")) {
-                        try {
-                            listUsers(req, resp);
-                        } catch (ServletException | IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if (action.equals("EDIT")) {
-                        try {
-                            getSingleUser(req, resp);
-                        } catch (ServletException | IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if (action.equals("ADD")) {
-                        try {
-                            addUser(req, resp);
-                        } catch (ServletException | IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-
-                }
-
-            }
-            if (type == UserType.student) {
-                if (action == null) {
-                    String id = session.getAttribute("userID").toString();
-                    User user = null;
-                    try {
-                        user = userService.getByID(Integer.parseInt(id));
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
-                    req.setAttribute("user", user);
-                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/userPages/user-info.jsp");
-                    try {
-                        requestDispatcher.forward(req, resp);
-                    } catch (ServletException | IOException e) {
-                        e.printStackTrace();
-                    }
-                } else if (action.equals("EDIT")) {
-                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/userPages/user-edit.jsp");
-                    try {
-                        requestDispatcher.forward(req, resp);
-                    } catch (ServletException | IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-        if (action != null) {
-            if (action.equals("SIGNUP")) {
-                try {
-                    signUpUser(req, resp);
-                } catch (ServletException | IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void listUsers(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> list = userService.findAll();
-        req.setAttribute("list", list);
-        req.setAttribute("message", req.getSession().getAttribute("message"));
-
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/adminPages/user-list.jsp");
-        requestDispatcher.forward(req, resp);
-    }
-
-    @GetMapping("/block")
-    protected void blockUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-
-        UserType type = (UserType) session.getAttribute("type");
-
-        if (type == UserType.admin) {
-            int id = Integer.parseInt(req.getParameter("id"));
-            if (userService.block(id)) {
-                req.setAttribute("message", "User blocked successfully");
-            }
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users?action=LIST");
-            try {
-                requestDispatcher.forward(req, resp);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users?action=LIST");
-            try {
-                requestDispatcher.forward(req, resp);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @GetMapping("/unblock")
-    protected void unblockUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        UserType type = (UserType) session.getAttribute("type");
-        if (type == UserType.admin) {
-            int id = Integer.parseInt(req.getParameter("id"));
-            if (userService.unBlock(id)) {
-                req.setAttribute("message", "User unblocked successfully");
-            }
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users?action=LIST");
-            try {
-                requestDispatcher.forward(req, resp);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users?action=LIST");
-            try {
-                requestDispatcher.forward(req, resp);
-            } catch (ServletException | IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @PostMapping
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        try {
-            req.setCharacterEncoding("UTF-8");
-        } catch (UnsupportedEncodingException e) {
+      if (type == UserType.admin) {
+        if (action == null) {
+          try {
+            listUsers(req, resp);
+          } catch (ServletException | IOException e) {
             e.printStackTrace();
+          }
+        } else if (action.equals("LIST")) {
+          try {
+            listUsers(req, resp);
+          } catch (ServletException | IOException e) {
+            e.printStackTrace();
+          }
+        } else if (action.equals("EDIT")) {
+          try {
+            getSingleUser(req, resp);
+          } catch (ServletException | IOException e) {
+            e.printStackTrace();
+          }
+        } else if (action.equals("ADD")) {
+          try {
+            addUser(req, resp);
+          } catch (ServletException | IOException e) {
+            e.printStackTrace();
+          }
+        } else if (action.equals("view_statistics")) {
+          viewStudentStatistics(req, resp);
         }
-        String username = req.getParameter("username");
-        String name = req.getParameter("name");
-        String surname = req.getParameter("surname");
-        EducationalProgram educationalProgram = EducationalProgram.valueOf(req.getParameter("educationalProgram"));
-        int support = Integer.parseInt(req.getParameter("supportLevel"));
-        String additionalInfo = req.getParameter("additionalInfo");
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        String id = req.getParameter("id");
-
-        User user = new User();
-        if (!id.isEmpty()) {
-            try {
-                user.setId(Integer.parseInt(id));
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
-        user.setUsername(username);
-        user.setName(name);
-        user.setSurname(surname);
-        user.setSupportLevel(support);
-        user.setEducationalProgram(educationalProgram);
-        user.setAdditionalInfo(additionalInfo);
-        user.setEmail(email);
-        user.setPassword(password);
-
-        if (!id.isEmpty()) {
-            //save
-            if (userService.update(user)) {
-                req.setAttribute("message", "User saved successfully!");
-                req.setAttribute("page", "user");
-            }
-
-        } else {
-            //update
-            user.setType(UserType.student);
-            user.setEducationalProgram(EducationalProgram.typical);
-            if (userService.save(user)) {
-                req.setAttribute("message", "User updated successfully!");
-                req.setAttribute("page", "user");
-            }
-        }
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/");
-        try {
+      }
+      if (type == UserType.student) {
+        if (action == null) {
+          welcome(req, resp);
+        } else if (action.equals("INFO")) {
+          userInfo(req, resp);
+        } else if (action.equals("EDIT")) {
+          RequestDispatcher requestDispatcher = req.getRequestDispatcher(
+              "/views/userPages/user-edit.jsp");
+          try {
             requestDispatcher.forward(req, resp);
-        } catch (ServletException | IOException e) {
+          } catch (ServletException | IOException e) {
             e.printStackTrace();
+          }
         }
-
+      }
     }
+    if (action != null) {
+      if (action.equals("SIGNUP")) {
+        try {
+          signUpUser(req, resp);
+        } catch (ServletException | IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+  }
 
+  protected void userInfo(HttpServletRequest req, HttpServletResponse resp) {
+    HttpSession session = req.getSession();
+    String id = session.getAttribute("userID").toString();
+    User user = userService.getByID(Integer.parseInt(id));
+    req.setAttribute("user", user);
+    RequestDispatcher requestDispatcher = req.getRequestDispatcher(
+        "/views/userPages/user-info.jsp");
+    try {
+      requestDispatcher.forward(req, resp);
+    } catch (ServletException | IOException e) {
+      e.printStackTrace();
+    }
+  }
 
-    public void getSingleUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        User user = userService.getByID(Integer.parseInt(id));
-        req.setAttribute("user", user);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/adminPages/user-add.jsp");
+  private void welcome(HttpServletRequest req, HttpServletResponse resp) {
+    HttpSession session = req.getSession();
+    String id = session.getAttribute("userID").toString();
+    User user = userService.getByID(Integer.parseInt(id));
+    req.setAttribute("user", user);
+    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/userPages/welcome.jsp");
+    try {
+      requestDispatcher.forward(req, resp);
+    } catch (ServletException | IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void viewStudentStatistics(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    int id = Integer.parseInt(req.getParameter("id"));
+    UserStatistics userStatistics = userService.getStatisticsById(id);
+    req.setAttribute("userStatistics", userStatistics);
+    RequestDispatcher requestDispatcher = req.getRequestDispatcher(
+        "/views/adminPages/view-user-statistics.jsp");
+    requestDispatcher.forward(req, resp);
+  }
+
+  public void listUsers(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    List<User> list = userService.findAll();
+    req.setAttribute("list", list);
+    req.setAttribute("message", req.getSession().getAttribute("message"));
+
+    RequestDispatcher requestDispatcher = req.getRequestDispatcher(
+        "/views/adminPages/user-list.jsp");
+    requestDispatcher.forward(req, resp);
+  }
+
+  @GetMapping("/block")
+  protected void blockUser(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    HttpSession session = req.getSession();
+
+    UserType type = (UserType) session.getAttribute("type");
+
+    if (type == UserType.admin) {
+      int id = Integer.parseInt(req.getParameter("id"));
+      if (userService.block(id)) {
+        req.setAttribute("message", "User blocked successfully");
+      }
+      RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users?action=LIST");
+      try {
         requestDispatcher.forward(req, resp);
-
-
-    }
-
-    public void signUpUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/publicPages/user-add.jsp");
+      } catch (ServletException | IOException e) {
+        e.printStackTrace();
+      }
+    } else {
+      RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users?action=LIST");
+      try {
         requestDispatcher.forward(req, resp);
+      } catch (ServletException | IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  @GetMapping("/unblock")
+  protected void unblockUser(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    HttpSession session = req.getSession();
+    UserType type = (UserType) session.getAttribute("type");
+    if (type == UserType.admin) {
+      int id = Integer.parseInt(req.getParameter("id"));
+      if (userService.unBlock(id)) {
+        req.setAttribute("message", "User unblocked successfully");
+      }
+      RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users?action=LIST");
+      try {
+        requestDispatcher.forward(req, resp);
+      } catch (ServletException | IOException e) {
+        e.printStackTrace();
+      }
+    } else {
+      RequestDispatcher requestDispatcher = req.getRequestDispatcher("/users?action=LIST");
+      try {
+        requestDispatcher.forward(req, resp);
+      } catch (ServletException | IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  @PostMapping
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    try {
+      req.setCharacterEncoding("UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
+    String username = req.getParameter("username");
+    String name = req.getParameter("name");
+    String surname = req.getParameter("surname");
+    EducationalProgram educationalProgram = EducationalProgram.valueOf(
+        req.getParameter("educationalProgram"));
+    int support = Integer.parseInt(req.getParameter("supportLevel"));
+    String additionalInfo = req.getParameter("additionalInfo");
+    String email = req.getParameter("email");
+    String password = req.getParameter("password");
+    String id = req.getParameter("id");
+
+    User user = new User();
+    if (!id.isEmpty()) {
+      try {
+        user.setId(Integer.parseInt(id));
+      } catch (NumberFormatException e) {
+        e.printStackTrace();
+      }
+    }
+    user.setUsername(username);
+    user.setName(name);
+    user.setSurname(surname);
+    user.setSupportLevel(support);
+    user.setEducationalProgram(educationalProgram);
+    user.setAdditionalInfo(additionalInfo);
+    user.setEmail(email);
+    user.setPassword(password);
+
+    if (!id.isEmpty()) {
+      //save
+      if (userService.update(user)) {
+        req.setAttribute("message", "User saved successfully!");
+        req.setAttribute("page", "user");
+      }
+
+    } else {
+      //update
+      user.setType(UserType.student);
+      user.setEducationalProgram(EducationalProgram.typical);
+      if (userService.save(user)) {
+        req.setAttribute("message", "User updated successfully!");
+        req.setAttribute("page", "user");
+      }
+    }
+    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/");
+    try {
+      requestDispatcher.forward(req, resp);
+    } catch (ServletException | IOException e) {
+      e.printStackTrace();
     }
 
-    public void addUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/adminPages/user-add.jsp");
-        requestDispatcher.forward(req, resp);
-    }
+  }
+
+
+  public void getSingleUser(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    String id = req.getParameter("id");
+    User user = userService.getByID(Integer.parseInt(id));
+    req.setAttribute("user", user);
+    RequestDispatcher requestDispatcher = req.getRequestDispatcher(
+        "/views/adminPages/user-add.jsp");
+    requestDispatcher.forward(req, resp);
+
+
+  }
+
+  public void signUpUser(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    RequestDispatcher requestDispatcher = req.getRequestDispatcher(
+        "/views/publicPages/user-add.jsp");
+    requestDispatcher.forward(req, resp);
+  }
+
+  public void addUser(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    RequestDispatcher requestDispatcher = req.getRequestDispatcher(
+        "/views/adminPages/user-add.jsp");
+    requestDispatcher.forward(req, resp);
+  }
 }

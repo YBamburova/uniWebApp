@@ -8,36 +8,24 @@
 <head>
     <title><spring:message code="LocaleSignIn"/>
     </title>
-    <link href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <jsp:include page="header_public.jsp"/>
-<div class="container" style="width: 450px; padding-top: 70px">
-    <div class="card">
-        <div class="card-body">
-            <form action="${pageContext.request.contextPath}/login" method="post">
-                <div class="mb-3">
-                    <label for="username" class="form-label">
-                        <spring:message code="LocaleUsername" />
-                    </label>
-                    <input minlength="3" maxlength="45" id="username" class="form-control"
-                           placeholder="<spring:message code="LocaleUsername" />" type="text" name="username" value="${user.username}"
-                           required><br>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">
-                        <spring:message code="LocalePassword" />
-                    </label>
-                    <input maxlength="45" minlength="1" id="password" class="form-control"
-                           placeholder="<spring:message code="LocalePassword" />" type="password" name="password"><br>
-                </div>
-                <input type="hidden" name="id" value="${user.id}">
-                <button type="submit" class="btn btn-primary">
-                    <spring:message code="LocaleSignIn" />
-                </button>
-            </form>
-        </div>
-    </div>
+<div class="container" style="width: 400px; padding-top: 70px">
+    <form action="${pageContext.request.contextPath}/login" method="post" class="form-signin">
+        <h2 class="form-signin-heading"><spring:message code="LocaleSignIn" /></h2>
+
+        <label for="username" class="sr-only">
+            <spring:message code="LocaleUsername" />
+        </label>
+        <input id="username" minlength="3" maxlength="45" name="username" class="form-control" placeholder="<spring:message code="LocaleUsername" />" required="" autofocus="">
+        <label for="password" class="sr-only">
+            <spring:message code="LocalePassword" />
+        </label>
+        <input maxlength="45" minlength="1" type="password" name="password" id="password" class="form-control" placeholder="<spring:message code="LocalePassword" />" required="">
+        <button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="LocaleSignIn" /></button>
+    </form>
 </div>
 <div class="toast-header">
 </div>
