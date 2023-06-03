@@ -258,7 +258,7 @@ CREATE TABLE `user_course` (
                                     `user_id` int NOT NULL,
                                     `course_id` int NOT NULL,
                                     `started_date` timestamp null,
-                                    `finished_date` timestamp null,
+                                    `completed_date` timestamp null,
                                     PRIMARY KEY (`user_id`,`course_id`),
                                     KEY `user_id` (`user_id`),
                                     CONSTRAINT `user_course_ibfk_1`
