@@ -98,6 +98,7 @@
         });
     })
 </script>
+<jsp:include page="../publicPages/footer.jsp"/>
 </body>
 </html>
 <%request.getSession().removeAttribute("message");%>

@@ -109,5 +109,6 @@
     form.submit();
   });
 </script>
+<jsp:include page="../publicPages/footer.jsp"/>
 </body>
 </html>

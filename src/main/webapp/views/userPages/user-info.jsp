@@ -55,5 +55,6 @@
     </table>
 </div>
 </body>
+<jsp:include page="../publicPages/footer.jsp"/>
 </html>
 <%request.getSession().removeAttribute("message");%>

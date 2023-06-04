@@ -33,5 +33,6 @@
         <div id="content" class="col-md-12">${course.content}</div>
     </div>
 </div>
+<jsp:include page="../publicPages/footer.jsp"/>
 </body>
 </html>
