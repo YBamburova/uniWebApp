@@ -13,7 +13,7 @@
 </head>
 <body>
 <jsp:include page="header_user.jsp"/>
-<div class="container" style="padding-top: 10px; width: 80%; max-width: 100%">
+<div class="container" style="padding-top: 100px; width: 80%; max-width: 100%">
     <h3><spring:message code="LocaleCourses"/>
     </h3>
     <table id="datatable" class="table table-hover">
