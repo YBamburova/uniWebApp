@@ -21,6 +21,11 @@ public class TestServiceImpl implements TestService {
   }
 
   @Override
+  public List<Test> getByUserId(Integer userId) {
+    return testRepository.findAllByAssignedStudentsId(userId);
+  }
+
+  @Override
   public Test get(int id) {
     return testRepository.findById(id).orElse(null);
   }
@@ -44,6 +49,7 @@ public class TestServiceImpl implements TestService {
     existing.setName(test.getName());
     existing.setTopic(test.getTopic());
     existing.setTimeForTest(test.getTimeForTest());
+    existing.setAssignedStudents(test.getAssignedStudents());
     testRepository.save(existing);
     return true;
   }

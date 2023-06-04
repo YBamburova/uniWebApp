@@ -45,6 +45,8 @@
             </th>
             <th><spring:message code="LocaleQuestion"/>
             </th>
+            <th><spring:message code="LocaleAssignedStudents"/>
+            </th>
             <th><spring:message code="LocaleAddQuestion"/>
             </th>
         </tr>
@@ -70,10 +72,10 @@
                     </c:forEach>
                 </td>
                 <td>${test.questions.size()}</td>
+                <td>${test.getAssignedStudentNames()}</td>
                 <td>
                     <a href="${pageContext.request.contextPath}/questions?testID=${test.id}" class="btn btn-warning"
                        style="" role="button" data-bs-toggle="button">+</a>
-
                     <a href="${pageContext.request.contextPath}/tests?action=EDIT&testID=${test.id}"
                        class="btn btn-warning" style="" role="button" data-bs-toggle="button"><spring:message code="LocaleEdit"/></a>
                     <a href="${pageContext.request.contextPath}/delete?action=test&id=${test.id}"

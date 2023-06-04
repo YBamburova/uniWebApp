@@ -108,16 +108,18 @@ public class CourseController {
     }
     String name = req.getParameter("name");
     String complexity = req.getParameter("complexity");
-    List<Integer> assignedStudents = Arrays.stream(req.getParameterValues("assignedStudents"))
-        .map(Integer::valueOf).collect(
-            Collectors.toList());
-    Set<User> students = new HashSet<>(userService.findAllById(assignedStudents));
     EducationalProgram educationalProgram = EducationalProgram.valueOf(
         req.getParameter("educationalProgram"));
     course.setName(name);
     course.setComplexity(Integer.valueOf(complexity));
     course.setEducationalProgram(educationalProgram);
-    course.setAssignedStudents(students);
+    if (req.getParameterValues("assignedStudents") != null) {
+      List<Integer> assignedStudents = Arrays.stream(req.getParameterValues("assignedStudents"))
+          .map(Integer::valueOf).collect(
+              Collectors.toList());
+      Set<User> students = new HashSet<>(userService.findAllById(assignedStudents));
+      course.setAssignedStudents(students);
+    }
     course.setContent(DEFAULT_HTML);
     if (StringUtils.hasText(id)) {
       courseService.update(course);

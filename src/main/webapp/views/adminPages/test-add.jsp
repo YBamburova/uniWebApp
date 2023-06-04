@@ -16,7 +16,8 @@
 <head>
     <title><spring:message code="LocaleAddTest"/>
     </title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 </head>
 
@@ -70,8 +71,20 @@
                     </select>
 
                 </div>
+                <div class="mb-3">
+                    <label for="assignedStudents" class="form-label"><spring:message
+                            code="LocaleAssignedStudents"/>
+                    </label>
+                    <select id="assignedStudents" name="assignedStudents" class="form-control"
+                            multiple>
+                        <c:forEach var="st" items="${students}">
+                            <option value="${st.id}">${st.name}, ${st.surname}</option>
+                        </c:forEach>
+                    </select>
+                </div>
 
-                <button type="submit" class="btn btn-lg btn-primary btn-block"><spring:message code="LocaleSubmit"/>
+                <button type="submit" class="btn btn-lg btn-primary btn-block"><spring:message
+                        code="LocaleSubmit"/>
                 </button>
 
 

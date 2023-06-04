@@ -26,17 +26,17 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users`
 (
-    `id`        int                      NOT NULL AUTO_INCREMENT,
-    `username`  varchar(255)              NOT NULL,
-    `name`      varchar(255)              NOT NULL,
-    `surname`   varchar(255)             NOT NULL,
-    `email`     varchar(255)              NOT NULL,
-    `password`  varchar(255)              NOT NULL,
-    `is_blocked` tinyint(1)               NOT NULL DEFAULT 0,
-    `type`      enum ('student','admin') NOT NULL DEFAULT 'student',
-    `educational_program`      enum ('typical', 'modified', 'adaptive') NOT NULL DEFAULT 'typical',
-    `support_level` int           NOT NULL default 0,
-    `additional_info` varchar(255),
+    `id`                  int                                      NOT NULL AUTO_INCREMENT,
+    `username`            varchar(255)                             NOT NULL,
+    `name`                varchar(255)                             NOT NULL,
+    `surname`             varchar(255)                             NOT NULL,
+    `email`               varchar(255)                             NOT NULL,
+    `password`            varchar(255)                             NOT NULL,
+    `is_blocked`          tinyint(1)                               NOT NULL DEFAULT 0,
+    `type`                enum ('student','admin')                 NOT NULL DEFAULT 'student',
+    `educational_program` enum ('typical', 'modified', 'adaptive') NOT NULL DEFAULT 'typical',
+    `support_level`       int                                      NOT NULL default 0,
+    `additional_info`     varchar(255),
     PRIMARY KEY (`id`),
     UNIQUE KEY `idusers_UNIQUE` (`id`),
     UNIQUE KEY `login_UNIQUE` (`username`),
@@ -54,13 +54,18 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users`
     DISABLE KEYS */;
 INSERT INTO `users`
-VALUES (1, 'ybamburova', 'Yuliana', 'Bamburova', 'ybamburova@mail.com', 'ybamburova', 0, 'admin', 'typical', 0, null),
-       (2, 'nazar', 'Nazar', 'Сrosseyed', 'nazarokulist@example.com', 'nazar', 0, 'student', 'adaptive', 5, null),
-       (3, 'proman', 'Pan', 'Roman', 'shelly.woods@example.com', 'proman', 0, 'student', 'typical', 1, null),
+VALUES (1, 'ybamburova', 'Yuliana', 'Bamburova', 'ybamburova@mail.com', 'ybamburova', 0, 'admin',
+        'typical', 0, null),
+       (2, 'nazar', 'Nazar', 'Сrosseyed', 'nazarokulist@example.com', 'nazar', 0, 'student',
+        'adaptive', 5, null),
+       (3, 'proman', 'Pan', 'Roman', 'shelly.woods@example.com', 'proman', 0, 'student', 'typical',
+        1, null),
        (4, 'vasyl', 'Vasyl', 'Simpson', 'heather.simpson@example.com', 'vasyl', 0,
         'student', 'typical', 2, null),
-       (5, 'alexburke', 'Alex', 'Burke', 'alex.burke@example.com', 'TdthXZ8XwOkUaIq', 0, 'student', 'typical', 3, null),
-       (6, 'christyevans', 'Christy', 'Evans', 'christy.evans@example.com', 'TmYnCkucmZbnSe5', 0, 'student', 'typical', 4, null);
+       (5, 'alexburke', 'Alex', 'Burke', 'alex.burke@example.com', 'TdthXZ8XwOkUaIq', 0, 'student',
+        'typical', 3, null),
+       (6, 'christyevans', 'Christy', 'Evans', 'christy.evans@example.com', 'TmYnCkucmZbnSe5', 0,
+        'student', 'typical', 4, null);
 /*!40000 ALTER TABLE `users`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -110,17 +115,17 @@ DROP TABLE IF EXISTS `question`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `question`
 (
-    `id`          int                   NOT NULL AUTO_INCREMENT,
-    `test_id`     int                   NOT NULL,
-    `text`        varchar(255)          NOT NULL,
-    `option1`     varchar(255)         NOT NULL,
-    `option2`     varchar(255)         NOT NULL,
-    `option3`     varchar(255)         NOT NULL,
-    `option4`     varchar(255)         NOT NULL,
-    `o1is_correct` tinyint(1)               NOT NULL DEFAULT 0,
-    `o2is_correct` tinyint(1)               NOT NULL DEFAULT 0,
-    `o3is_correct` tinyint(1)               NOT NULL DEFAULT 0,
-    `o4is_correct` tinyint(1)               NOT NULL DEFAULT 0,
+    `id`           int          NOT NULL AUTO_INCREMENT,
+    `test_id`      int          NOT NULL,
+    `text`         varchar(255) NOT NULL,
+    `option1`      varchar(255) NOT NULL,
+    `option2`      varchar(255) NOT NULL,
+    `option3`      varchar(255) NOT NULL,
+    `option4`      varchar(255) NOT NULL,
+    `o1is_correct` tinyint(1)   NOT NULL DEFAULT 0,
+    `o2is_correct` tinyint(1)   NOT NULL DEFAULT 0,
+    `o3is_correct` tinyint(1)   NOT NULL DEFAULT 0,
+    `o4is_correct` tinyint(1)   NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`),
     UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE = InnoDB
@@ -147,15 +152,18 @@ VALUES (33, 1, 'CPP', 'right', '---', '---', '---', 1, 0, 0, 0),
        (40, 2, 'опраоароа', 'ораоа', 'опренггк', 'гкгкг', 'кгкгкг', 1, 1, 0, 0),
        (41, 3, 'erqweqweqweqweqweqweqw', '+++++', '-----', '-----', '+++++', 1, 0, 0, 1),
        (42, 31, 'hgfhgdhdghdghdg', '+++++', '+++++', '_______', '_______', 1, 1, 0, 0),
-       (43, 32, 'ghdhgdhdghdghdghd', '++++++', 'fgsdgfsgfsd', 'gsdfgsdfgfsd', 'gsdfgsdfgsdf', 1, 0, 0,
+       (43, 32, 'ghdhgdhdghdghdghd', '++++++', 'fgsdgfsgfsd', 'gsdfgsdfgfsd', 'gsdfgsdfgsdf', 1, 0,
+        0,
         0),
        (44, 34, 'bbvbvbvb', '4242234', '4224243', '342424', '4234234423', 0, 0, 0, 1),
        (45, 32, 'fdsfsd', 'fdsfsdfsd', 'fsdfsd', 'fsdfsd', 'ffsdfsdfsd', 0, 0, 1, 0),
        (46, 40, 'What of the following is the default value of a local variable?', 'null', '0',
         'Depends upon the type of variable', 'Not assigned', 0, 0, 0, 1),
-       (47, 40, 'What is the default value of float variable?', '0.0d', '0.0f', '0', 'not defined', 0, 1,
+       (47, 40, 'What is the default value of float variable?', '0.0d', '0.0f', '0', 'not defined',
+        0, 1,
         0, 0),
-       (48, 40, 'What is the default value of Object variable?', 'undefined', '0', 'null', 'not defined', 0,
+       (48, 40, 'What is the default value of Object variable?', 'undefined', '0', 'null',
+        'not defined', 0,
         0, 1, 0);
 /*!40000 ALTER TABLE `question`
     ENABLE KEYS */;
@@ -238,20 +246,34 @@ VALUES (40, 'Java Basics Quiz', 2, 3, 30, 2),
     ENABLE KEYS */;
 UNLOCK TABLES;
 
+DROP TABLE IF EXISTS `user_test`;
+CREATE TABLE `user_test`
+(
+    `user_id` int NOT NULL,
+    `test_id` int NOT NULL,
+    PRIMARY KEY (`user_id`, `test_id`),
+    KEY `user_id` (`user_id`),
+    CONSTRAINT `user_test_ibfk_1`
+        FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+    CONSTRAINT `user_test_ibfk_2`
+        FOREIGN KEY (`test_id`) REFERENCES `tests` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
 DROP TABLE IF EXISTS `course`;
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `course`
 (
-    `id`                 int         NOT NULL AUTO_INCREMENT,
-    `name`               varchar(45) NOT NULL,
-    `complexity`         int         NOT NULL,
-    `content`            text         NOT NULL,
-    `educational_program`      enum ('typical', 'modified', 'adaptive') NOT NULL DEFAULT 'typical',
+    `id`                  int                                      NOT NULL AUTO_INCREMENT,
+    `name`                varchar(45)                              NOT NULL,
+    `complexity`          int                                      NOT NULL,
+    `content`             text                                     NOT NULL,
+    `educational_program` enum ('typical', 'modified', 'adaptive') NOT NULL DEFAULT 'typical',
     PRIMARY KEY (`id`),
     UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
 insert into course (id, name, complexity, content, educational_program)
 values (1, 'Course1', 3, '<html lang=""en"">
@@ -313,26 +335,28 @@ values (3, 'Course3', 5, '<html lang=""en"">
 </html>', 'modified');
 
 DROP TABLE IF EXISTS `user_course`;
-CREATE TABLE `user_course` (
-                                    `user_id` int NOT NULL,
-                                    `course_id` int NOT NULL,
-                                    `started_date` timestamp null,
-                                    `completed_date` timestamp null,
-                                    PRIMARY KEY (`user_id`,`course_id`),
-                                    KEY `user_id` (`user_id`),
-                                    CONSTRAINT `user_course_ibfk_1`
-                                        FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-                                    CONSTRAINT `user_course_ibfk_2`
-                                        FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `user_course`
+(
+    `user_id`        int       NOT NULL,
+    `course_id`      int       NOT NULL,
+    `started_date`   timestamp null,
+    `completed_date` timestamp null,
+    PRIMARY KEY (`user_id`, `course_id`),
+    KEY `user_id` (`user_id`),
+    CONSTRAINT `user_course_ibfk_1`
+        FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+    CONSTRAINT `user_course_ibfk_2`
+        FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
 insert into user_course (user_id, course_id)
-values (2,1);
+values (2, 1);
 insert into user_course (user_id, course_id)
-values (3,1);
+values (3, 1);
 insert into user_course (user_id, course_id)
-values (4,2);
+values (4, 2);
 insert into user_course (user_id, course_id)
-values (5,3);
+values (5, 3);
 insert into user_course (user_id, course_id)
-values (6,3);
+values (6, 3);

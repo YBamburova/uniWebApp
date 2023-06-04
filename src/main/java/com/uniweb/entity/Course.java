@@ -48,11 +48,12 @@ public class Course {
   @Transient
   private Date completedDate;
 
+  //used in jsp
   public String getAssignedStudentNames() {
     return assignedStudents.stream().map(u -> u.getName() + ", " + u.getUsername())
         .collect(Collectors.joining("; "));
   }
-
+  //used in jsp
   public boolean hasAssignedStudent(int id) {
     return assignedStudents.stream().anyMatch(u -> u.getId() == id);
   }

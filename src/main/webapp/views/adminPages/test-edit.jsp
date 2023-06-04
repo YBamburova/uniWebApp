@@ -63,6 +63,16 @@
                            value="${test.topic}" type="text" name="topic" required><br>
                 </div>
 
+                <div class="mb-3">
+                    <label for="assignedStudents" class="form-label"><spring:message code="LocaleAssignedStudents"/>
+                    </label>
+                    <select id="assignedStudents" name="assignedStudents" class="form-control" multiple>
+                        <c:forEach var="st" items="${students}">
+                            <option value="${st.id}" ${test.hasAssignedStudent(st.id) ? 'selected="selected"' : ''}>${st.name}, ${st.surname}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-lg btn-primary btn-block"><spring:message code="LocaleSubmit"/>
                 </button>
             </form>
