@@ -10,7 +10,7 @@
     </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
-<body style="background-image: ../images/children.jsp">
+<body>
 <jsp:include page="header_public.jsp"/>
 <div class="container" style="width: 400px; padding-top: 70px">
     <form action="${pageContext.request.contextPath}/login" method="post" class="form-signin">
