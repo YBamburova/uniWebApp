@@ -94,6 +94,7 @@
     });
   })
 </script>
+<jsp:include page="../publicPages/chat.jsp"/>
 <jsp:include page="../publicPages/footer.jsp"/>
 </body>
 </html>

@@ -55,6 +55,7 @@
     </table>
 </div>
 </body>
+<jsp:include page="../publicPages/chat.jsp"/>
 <jsp:include page="../publicPages/footer.jsp"/>
 </html>
 <%request.getSession().removeAttribute("message");%>
