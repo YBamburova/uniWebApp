@@ -15,12 +15,14 @@ a, a:focus, a:hover {
 html, body {
   height: 100%;
   background-color: #ccc;
+  background-image: url('../images/hover.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 body {
   color: #000;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -68,7 +70,6 @@ body {
   font-size: 16px;
   font-weight: bold;
   color: #000; /* IE8 proofing */
-  color: rgba(0, 0, 0, .75);
   border-bottom: 2px solid transparent;
 }
 

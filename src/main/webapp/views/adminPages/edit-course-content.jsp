@@ -8,6 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<link rel="stylesheet" href="../../css/courses.css">
 
 <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
 <script type="text/javascript"

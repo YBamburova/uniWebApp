@@ -1,0 +1,7 @@
+html, body {
+  height: 100%;
+  background-color: #ccc;
+  background-image: url('../images/error.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}

@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<link rel="stylesheet" href="../css/login.css">
 
 <html>
 <head>
@@ -24,7 +25,7 @@
             <spring:message code="LocalePassword" />
         </label>
         <input maxlength="45" minlength="1" type="password" name="password" id="password" class="form-control" placeholder="<spring:message code="LocalePassword" />" required="">
-        <button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="LocaleSignIn" /></button>
+        <button class="btn btn-lg btn-block" type="submit"><spring:message code="LocaleSignIn" /></button>
     </form>
 </div>
 <div class="toast-header">

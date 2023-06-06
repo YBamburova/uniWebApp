@@ -37,7 +37,7 @@
 
             <div class="masthead clearfix">
                 <div class="inner">
-                    <h3 class="masthead-brand"><spring:message code="LocaleAppName"/></h3>
+                    <h3 class="masthead-brand"><img src="../../images/Equali-removebg-preview.png" width="200" height="40" alt="" ></h3>
                     <nav>
                         <ul class="nav masthead-nav">
                             <li class="nav-item">

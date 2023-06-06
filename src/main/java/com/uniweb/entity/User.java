@@ -48,7 +48,7 @@ public class User {
   @ManyToMany(fetch = FetchType.EAGER, mappedBy = "assignedStudents")
   private Set<Course> courses;
 
-  @ManyToMany(mappedBy = "assignedStudents")
+  @ManyToMany(fetch = FetchType.EAGER, mappedBy = "assignedStudents")
   private List<Test> tests;
 
   public boolean getIsBlocked() {

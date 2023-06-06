@@ -26,7 +26,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><spring:message code="LocaleAppName"/></a>
+            <a class="navbar-brand" style="padding: 5px"><img src="../../images/Equali-removebg-preview.png" width="200" height="40" alt="" ></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
             <ul class="nav navbar-nav">
@@ -69,14 +69,14 @@
             </ul>
         </div><!--/.nav-collapse -->
     </div>
-    <%
-        if (session.getAttribute("message") != null) {
-            out.print("<div class=\"alert alert-success\" role=\"alert\">\n" +
-                    session.getAttribute("message") +
-                    "</div>");
-        }
-        session.removeAttribute("message");
-    %>
 </nav>
+<%
+    if (session.getAttribute("message") != null) {
+        out.print("<div style=\"position: fixed; margin-top: 50px; right: 10px\" class=\"alert alert-success\" role=\"alert\">\n" +
+                session.getAttribute("message") +
+                "</div>");
+    }
+    session.removeAttribute("message");
+%>
 
 
