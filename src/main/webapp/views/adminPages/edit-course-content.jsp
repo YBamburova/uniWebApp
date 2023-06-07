@@ -35,10 +35,10 @@
 </head>
 <body>
 <jsp:include page="header_admin.jsp"/>
-<div class="container" style="padding-top: 100px; width: 80%; max-width: 100%;">
+<div class="container" style="padding-top: 100px; padding-bottom: 100px; width: 80%; max-width: 100%;">
     <div class="row">
         <div class="col-md-6">
-            <a href="${pageContext.request.contextPath}/courses" class="btn btn-primary mb-4"
+            <a href="${pageContext.request.contextPath}/courses" class="btn btn-warning mb-4"
                style="" role="button"><spring:message code="LocaleBack"/>
             </a>
             <button type="submit" form="course-form" class="btn btn-warning mb-4"
@@ -46,12 +46,12 @@
             </button>
         </div>
         <div class="col-md-6">
-            <button type="button" class="btn btn-primary mb-4" id="reviewCourse">
+            <button type="button" class="btn btn-warning mb-4" id="reviewCourse">
                 Preview
             </button>
         </div>
     </div>
-    <div class="row">
+    <div class="row overflow-auto">
         <div class="col-md-6">
             <form id="course-form" action="${pageContext.request.contextPath}/courses/content"
                   method="post">

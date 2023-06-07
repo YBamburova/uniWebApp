@@ -112,7 +112,7 @@
             </div>
         </div>
     </div>
-    <button id="chat-show" style="position: absolute; left: 20px; padding: 10px; bottom: 70px"
+    <button id="chat-show" style="position: fixed; left: 20px; padding: 10px; bottom: 70px"
             type="button"
             class="btn btn-default btn-lg">
         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>

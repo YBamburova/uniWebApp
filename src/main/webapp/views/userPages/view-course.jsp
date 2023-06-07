@@ -22,7 +22,7 @@
 </head>
 <body>
 <jsp:include page="header_user.jsp"/>
-<div class="container" style="padding-top: 100px; width: 80%; max-width: 100%;">
+<div class="container" style="padding-top: 100px; padding-bottom: 100px; width: 80%; max-width: 100%;">
     <a href="${pageContext.request.contextPath}/courses" class="btn btn-warning mb-4" style=""
        role="button"><spring:message code="LocaleBack"/>
     </a>

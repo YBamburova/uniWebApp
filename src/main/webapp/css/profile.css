@@ -15,4 +15,5 @@ html, body {
   background-image: url('../images/profile.png');
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
