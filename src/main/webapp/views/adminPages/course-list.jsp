@@ -10,14 +10,16 @@
 <head>
     <title><spring:message code="LocaleCourses"/>
     </title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <jsp:include page="header_admin.jsp"/>
 <div class="container" style="padding-top: 100px; width: 80%; max-width: 100%">
     <h3><spring:message code="LocaleCourses"/>
     </h3>
-    <a href="${pageContext.request.contextPath}/courses?action=add_course" class="btn btn-warning mb-4"
+    <a href="${pageContext.request.contextPath}/courses?action=add_course"
+       class="btn btn-warning mb-4"
        style="" role="button"
        data-bs-toggle="button"><spring:message code="LocaleAddCourse"/>
     </a>
@@ -44,18 +46,21 @@
                 <td>${course.educationalProgram}</td>
                 <td>${course.getAssignedStudentNames()}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/courses?action=view&id=${course.id}"
-                       class="btn btn-warning" role="button"
-                       data-bs-toggle="button"><spring:message code="LocaleViewContent"/>
-                    </a>
-                    <a href="${pageContext.request.contextPath}/courses?action=edit_course&id=${course.id}"
-                       class="btn btn-warning" style="" role="button"
-                       data-bs-toggle="button"><spring:message code="LocaleEdit"/>
-                    </a>
-                    <a href="${pageContext.request.contextPath}/courses?action=delete_course&id=${course.id}"
-                       class="btn btn-danger" style="" role="button"
-                       data-bs-toggle="button"><spring:message code="LocaleDelete"/>
-                    </a>
+                    <div style="inline-size: max-content">
+                        <a href="${pageContext.request.contextPath}/courses?action=view&id=${course.id}"
+                           class="btn btn-warning" role="button"
+                           data-bs-toggle="button"><spring:message code="LocaleViewContent"/>
+                        </a>
+                        <a href="${pageContext.request.contextPath}/courses?action=edit_course&id=${course.id}"
+                           class="btn btn-warning" style="" role="button"
+                           data-bs-toggle="button"><spring:message code="LocaleEdit"/>
+                        </a>
+                        <a href="${pageContext.request.contextPath}/courses?action=delete_course&id=${course.id}"
+                           class="btn btn-danger" style="" role="button"
+                           data-bs-toggle="button"><spring:message code="LocaleDelete"/>
+                        </a>
+                    </div>
+
                 </td>
             </tr>
         </c:forEach>
