@@ -26,7 +26,7 @@
 <body>
 <jsp:include page="header_admin.jsp"/>
 
-<div class="container" style="padding-top: 100px; margin-bottom: 100px">
+<div class="container" style="padding-top: 100px; padding-bottom: 100px; margin-bottom: 100px">
     <h3><spring:message code="LocaleTests"/>
     </h3>
     <a href="${pageContext.request.contextPath}/tests?action=add" class="btn btn btn-warning mb-0"

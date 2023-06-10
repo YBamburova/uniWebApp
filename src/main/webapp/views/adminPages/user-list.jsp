@@ -20,7 +20,7 @@
 </head>
 <body>
 <jsp:include page="header_admin.jsp"/>
-<div class="container" style="padding-top: 100px; width: 95%; max-width: 100%">
+<div class="container" style="padding-top: 100px; padding-bottom: 100px; width: 95%; max-width: 100%">
     <h3><spring:message code="LocaleUsers"/>
     </h3>
     <a href="${pageContext.request.contextPath}/users?action=ADD" class="btn btn-warning mb-4"

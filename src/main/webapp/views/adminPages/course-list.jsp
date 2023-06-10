@@ -15,7 +15,7 @@
 </head>
 <body>
 <jsp:include page="header_admin.jsp"/>
-<div class="container" style="padding-top: 100px; width: 80%; max-width: 100%">
+<div class="container" style="padding-top: 100px; padding-bottom: 100px; width: 80%; max-width: 100%">
     <h3><spring:message code="LocaleCourses"/>
     </h3>
     <a href="${pageContext.request.contextPath}/courses?action=add_course"
